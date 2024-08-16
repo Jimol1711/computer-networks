@@ -2,7 +2,7 @@
 import jsockets
 import sys
 
-s = jsockets.socket_tcp_connect('localhost', 1818)
+s = jsockets.socket_tcp_connect('127.0.01', 1818)
 if s is None:
     print('could not open socket')
     sys.exit(1)

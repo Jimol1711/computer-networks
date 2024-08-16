@@ -23,6 +23,7 @@ s = jsockets.socket_udp_connect(sys.argv[1], sys.argv[2])
 if s is None:
     print('could not open socket')
     sys.exit(1)
+# print(f'Client sending on port 1818')
 
 # Esto es para dejar tiempo al server para conectar el socket
 s.send(b'hola')
@@ -36,9 +37,9 @@ newthread.start()
 for line in sys.stdin:
     try:
         s.send(line.encode())
-    except:
+    except Exception as e:
+        print(f"Error sending data: {e}", file=sys.stderr)
         continue
 
 time.sleep(3)  # dar tiempo para que vuelva la respuesta
 s.close()
-
