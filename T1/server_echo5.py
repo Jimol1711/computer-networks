@@ -6,7 +6,7 @@ import os, signal
 import sys
 import jsockets
 
-Sock = jsockets.socket_tcp_bind(1818)
+Sock = jsockets.socket_tcp_bind(1820)
 if Sock is None:
     print('could not open socket')
     sys.exit(1)

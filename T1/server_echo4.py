@@ -22,7 +22,7 @@ class ClientThread(threading.Thread):
         print('Cliente desconectado')
 
 # Main
-s = jsockets.socket_tcp_bind(1818)
+s = jsockets.socket_tcp_bind(1819)
 if s is None:
     print('could not open socket')
     sys.exit(1)

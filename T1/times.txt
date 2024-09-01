@@ -1,0 +1,53 @@
+Single large file experiment for echo2 port 1818:
+
+real    0m5,731s
+user    0m0,139s
+sys     0m0,575s
+
+real    0m5,968s
+user    0m0,155s
+sys     0m0,362s
+
+real    0m5,173s
+user    0m0,091s
+sys     0m0,325s
+
+real    0m4,118s
+user    0m0,056s
+sys     0m0,215s
+
+Single large file experiment for echo4 port 1819:
+
+real    0m11,222s
+user    0m0,136s
+sys     0m0,596s
+
+real    0m10,148s
+user    0m0,122s
+sys     0m0,350s
+
+real    0m10,355s
+user    0m0,077s
+sys     0m0,317s
+
+real    0m9,642s
+user    0m0,125s
+sys     0m0,230s
+
+Single large file experiment for echo5 port 1820:
+
+real    0m4,763s
+user    0m0,130s
+sys     0m0,490s
+
+real    0m4,868s
+user    0m0,131s
+sys     0m0,418s
+
+real    0m4,780s
+user    0m0,095s
+sys     0m0,607s
+
+real    0m4,212s
+user    0m0,058s
+sys     0m0,231s
