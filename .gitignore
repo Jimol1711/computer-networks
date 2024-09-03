@@ -1,2 +1,8 @@
 __pycache__/
 OUT*
+medium_files/
+trash/
+largefile.bin
+largefile1.bin
+largefile2.bin
+largefile3.bin

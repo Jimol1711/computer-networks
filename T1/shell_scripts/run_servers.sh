@@ -4,4 +4,4 @@
 
 echo "Running servers..."
 
-../server_echo2.py & ../server_echo4.py & ../server_echo5.py
+../servers/server_echo2.py & ../servers/server_echo4.py & ../servers/server_echo5.py

@@ -1,0 +1,974 @@
+Twenty medium files in parallel for echo2 port 1818 size 1000:
+
+real    0m4,443s
+user    0m0,050s
+sys     0m0,000s
+
+real    0m4,482s
+user    0m0,029s
+sys     0m0,028s
+
+real    0m4,490s
+user    0m0,025s
+sys     0m0,025s
+
+real    0m4,508s
+user    0m0,017s
+sys     0m0,034s
+
+real    0m4,528s
+user    0m0,022s
+sys     0m0,037s
+
+real    0m4,540s
+user    0m0,015s
+sys     0m0,030s
+
+real    0m4,563s
+user    0m0,025s
+sys     0m0,015s
+
+real    0m4,565s
+user    0m0,037s
+sys     0m0,032s
+
+real    0m4,606s
+user    0m0,035s
+
+real    0m4,606s
+user    0m0,024s
+sys     0m0,030s
+
+real    0m4,611s
+user    0m0,014s
+sys     0m0,042s
+sys     0m0,027s
+
+real    0m4,652s
+user    0m0,026s
+sys     0m0,033s
+
+real    0m4,661s
+user    0m0,032s
+
+real    0m4,581s
+user    0m0,017s
+sys     0m0,040s
+
+real    0m4,671s
+user    0m0,028s
+sys     0m0,039s
+sys     0m0,025s
+
+real    0m4,703s
+user    0m0,011s
+sys     0m0,049s
+
+real    0m4,719s
+user    0m0,028s
+sys     0m0,031s
+
+real    0m4,634s
+user    0m0,026s
+sys     0m0,036s
+
+real    0m4,723s
+user    0m0,047s
+sys     0m0,007s
+
+real    0m4,714s
+user    0m0,020s
+sys     0m0,039s
+Twenty medium files in parallel for echo2 port 1818 size 2000:
+
+real    0m4,413s
+user    0m0,014s
+sys     0m0,033s
+
+real    0m4,604s
+user    0m0,010s
+
+real    0m4,603s
+user    0m0,006s
+sys     0m0,041s
+
+real    0m4,618s
+user    0m0,012s
+
+real    0m4,618s
+user    0m0,000s
+sys     0m0,050s
+sys     0m0,036s
+sys     0m0,040s
+
+real    0m4,774s
+user    0m0,019s
+sys     0m0,029s
+
+real    0m4,795s
+user    0m0,011s
+sys     0m0,042s
+
+real    0m4,797s
+user    0m0,013s
+sys     0m0,037s
+
+real    0m4,856s
+user    0m0,015s
+sys     0m0,038s
+
+real    0m4,858s
+user    0m0,012s
+sys     0m0,046s
+
+real    0m4,869s
+user    0m0,024s
+sys     0m0,029s
+
+real    0m4,877s
+user    0m0,029s
+sys     0m0,028s
+
+real    0m4,881s
+user    0m0,017s
+sys     0m0,042s
+
+real    0m4,894s
+user    0m0,018s
+sys     0m0,040s
+
+real    0m4,895s
+user    0m0,018s
+sys     0m0,035s
+
+real    0m4,905s
+user    0m0,005s
+sys     0m0,047s
+
+real    0m4,921s
+user    0m0,013s
+sys     0m0,043s
+
+real    0m4,929s
+user    0m0,013s
+sys     0m0,037s
+
+real    0m4,986s
+user    0m0,020s
+sys     0m0,041s
+
+real    0m4,982s
+user    0m0,020s
+sys     0m0,038s
+Twenty medium files in parallel for echo2 port 1818 size 5000:
+
+real    0m4,099s
+user    0m0,020s
+sys     0m0,021s
+
+real    0m4,111s
+user    0m0,010s
+sys     0m0,028s
+
+real    0m4,130s
+user    0m0,019s
+sys     0m0,018s
+
+real    0m4,161s
+user    0m0,019s
+
+real    0m4,163s
+user    0m0,037s
+sys     0m0,000s
+sys     0m0,019s
+
+real    0m4,200s
+user    0m0,017s
+
+real    0m4,199s
+user    0m0,013s
+sys     0m0,026s
+
+real    0m4,206s
+user    0m0,019s
+
+real    0m4,227s
+user    0m0,026s
+
+real    0m4,225s
+user    0m0,034s
+sys     0m0,007s
+
+real    0m4,229s
+user    0m0,014s
+
+real    0m4,236s
+user    0m0,016s
+
+real    0m4,241s
+user    0m0,023s
+sys     0m0,023s
+sys     0m0,015s
+sys     0m0,026s
+sys     0m0,028s
+sys     0m0,026s
+sys     0m0,025s
+
+real    0m4,271s
+user    0m0,027s
+sys     0m0,021s
+
+real    0m4,315s
+user    0m0,010s
+sys     0m0,032s
+
+real    0m4,344s
+user    0m0,021s
+sys     0m0,023s
+
+real    0m4,344s
+user    0m0,017s
+sys     0m0,023s
+
+real    0m4,347s
+user    0m0,029s
+sys     0m0,012s
+
+real    0m4,365s
+user    0m0,023s
+sys     0m0,019s
+
+real    0m4,395s
+user    0m0,026s
+sys     0m0,018s
+Twenty medium files in parallel for echo2 port 1818 size 8000:
+
+real    0m4,216s
+user    0m0,019s
+sys     0m0,019s
+
+real    0m4,329s
+user    0m0,007s
+sys     0m0,032s
+
+real    0m4,353s
+user    0m0,017s
+
+real    0m4,358s
+user    0m0,023s
+
+real    0m4,358s
+user    0m0,007s
+sys     0m0,033s
+sys     0m0,019s
+sys     0m0,023s
+
+real    0m4,371s
+user    0m0,006s
+sys     0m0,036s
+
+real    0m4,376s
+user    0m0,019s
+sys     0m0,023s
+
+real    0m4,395s
+user    0m0,013s
+sys     0m0,031s
+
+real    0m4,404s
+user    0m0,006s
+sys     0m0,037s
+
+real    0m4,421s
+user    0m0,019s
+sys     0m0,023s
+
+real    0m4,452s
+user    0m0,015s
+
+real    0m4,451s
+user    0m0,008s
+sys     0m0,036s
+sys     0m0,029s
+
+real    0m4,496s
+user    0m0,020s
+sys     0m0,034s
+
+real    0m4,498s
+user    0m0,012s
+sys     0m0,029s
+
+real    0m4,501s
+user    0m0,004s
+sys     0m0,040s
+
+real    0m4,515s
+user    0m0,004s
+sys     0m0,042s
+
+real    0m4,575s
+user    0m0,005s
+sys     0m0,035s
+
+real    0m4,575s
+user    0m0,007s
+sys     0m0,040s
+
+real    0m4,596s
+user    0m0,009s
+sys     0m0,045s
+
+real    0m4,593s
+user    0m0,008s
+sys     0m0,040s
+
+Twenty medium files in parallel for echo4 port 1819 size 1000:
+
+real    0m4,279s
+user    0m0,014s
+sys     0m0,040s
+
+real    0m4,333s
+user    0m0,016s
+sys     0m0,043s
+
+real    0m4,344s
+user    0m0,011s
+sys     0m0,042s
+
+real    0m4,350s
+user    0m0,031s
+sys     0m0,026s
+
+real    0m4,363s
+user    0m0,011s
+sys     0m0,052s
+
+real    0m4,364s
+user    0m0,034s
+sys     0m0,027s
+
+real    0m4,391s
+user    0m0,042s
+
+real    0m4,393s
+user    0m0,024s
+sys     0m0,031s
+sys     0m0,014s
+
+real    0m4,399s
+user    0m0,028s
+sys     0m0,029s
+
+real    0m4,413s
+user    0m0,019s
+
+real    0m4,419s
+user    0m0,026s
+sys     0m0,035s
+sys     0m0,038s
+
+real    0m4,422s
+user    0m0,017s
+sys     0m0,043s
+
+real    0m4,441s
+user    0m0,032s
+sys     0m0,032s
+
+real    0m4,449s
+user    0m0,016s
+sys     0m0,046s
+
+real    0m4,456s
+user    0m0,017s
+
+real    0m4,459s
+user    0m0,028s
+sys     0m0,033s
+sys     0m0,051s
+
+real    0m4,504s
+user    0m0,039s
+sys     0m0,034s
+
+real    0m4,741s
+user    0m0,035s
+sys     0m0,023s
+
+real    0m4,755s
+user    0m0,022s
+sys     0m0,032s
+
+real    0m4,762s
+user    0m0,038s
+sys     0m0,014s
+Twenty medium files in parallel for echo4 port 1819 size 2000:
+
+real    0m3,977s
+user    0m0,026s
+sys     0m0,021s
+
+real    0m3,987s
+user    0m0,011s
+sys     0m0,032s
+
+real    0m3,992s
+user    0m0,000s
+sys     0m0,043s
+
+real    0m4,024s
+user    0m0,010s
+
+real    0m4,018s
+user    0m0,026s
+sys     0m0,017s
+sys     0m0,034s
+
+real    0m4,068s
+user    0m0,013s
+sys     0m0,031s
+
+real    0m4,105s
+user    0m0,023s
+sys     0m0,023s
+
+real    0m4,111s
+user    0m0,015s
+sys     0m0,031s
+
+real    0m4,111s
+user    0m0,023s
+sys     0m0,023s
+
+real    0m4,130s
+user    0m0,014s
+sys     0m0,036s
+
+real    0m4,159s
+user    0m0,011s
+
+real    0m4,166s
+user    0m0,025s
+sys     0m0,024s
+sys     0m0,036s
+
+real    0m4,175s
+user    0m0,025s
+sys     0m0,034s
+
+real    0m4,185s
+user    0m0,037s
+sys     0m0,009s
+
+real    0m4,194s
+user    0m0,025s
+
+real    0m4,204s
+user    0m0,010s
+sys     0m0,040s
+sys     0m0,020s
+
+real    0m4,211s
+user    0m0,017s
+sys     0m0,034s
+
+real    0m4,227s
+user    0m0,034s
+sys     0m0,019s
+
+real    0m4,732s
+user    0m0,023s
+sys     0m0,035s
+
+real    0m4,739s
+user    0m0,030s
+sys     0m0,024s
+Twenty medium files in parallel echo4 port 1819 size 5000:
+
+real    0m3,942s
+user    0m0,017s
+sys     0m0,027s
+
+real    0m3,960s
+user    0m0,032s
+
+real    0m3,970s
+user    0m0,008s
+
+real    0m3,888s
+user    0m0,025s
+sys     0m0,012s
+sys     0m0,031s
+sys     0m0,010s
+
+real    0m3,982s
+user    0m0,023s
+sys     0m0,017s
+
+real    0m3,984s
+user    0m0,024s
+sys     0m0,018s
+
+real    0m3,993s
+user    0m0,016s
+sys     0m0,023s
+
+real    0m4,014s
+user    0m0,026s
+sys     0m0,019s
+
+real    0m4,026s
+user    0m0,021s
+
+real    0m3,932s
+user    0m0,011s
+
+real    0m4,025s
+user    0m0,025s
+
+real    0m4,038s
+user    0m0,018s
+sys     0m0,023s
+sys     0m0,028s
+sys     0m0,015s
+sys     0m0,020s
+
+real    0m4,059s
+user    0m0,026s
+
+real    0m3,957s
+user    0m0,016s
+
+real    0m3,955s
+user    0m0,014s
+sys     0m0,027s
+sys     0m0,032s
+sys     0m0,017s
+
+real    0m3,960s
+user    0m0,015s
+sys     0m0,027s
+
+real    0m4,069s
+user    0m0,010s
+sys     0m0,033s
+
+real    0m4,065s
+user    0m0,022s
+sys     0m0,022s
+
+real    0m4,104s
+user    0m0,023s
+sys     0m0,028s
+
+real    0m4,107s
+user    0m0,026s
+sys     0m0,035s
+Twenty medium files in parallel echo4 port 1819 size 8000:
+
+real    0m3,879s
+user    0m0,038s
+sys     0m0,000s
+
+real    0m3,913s
+user    0m0,026s
+
+real    0m3,909s
+user    0m0,018s
+
+real    0m3,916s
+user    0m0,007s
+sys     0m0,032s
+sys     0m0,018s
+sys     0m0,013s
+
+real    0m3,917s
+user    0m0,016s
+sys     0m0,021s
+
+real    0m3,924s
+user    0m0,000s
+sys     0m0,037s
+
+real    0m4,011s
+user    0m0,022s
+
+real    0m4,009s
+user    0m0,022s
+sys     0m0,017s
+
+real    0m4,043s
+user    0m0,013s
+sys     0m0,031s
+
+real    0m4,018s
+user    0m0,006s
+
+real    0m4,024s
+user    0m0,011s
+sys     0m0,031s
+
+real    0m4,034s
+user    0m0,022s
+
+real    0m4,027s
+user    0m0,020s
+
+real    0m4,035s
+user    0m0,024s
+sys     0m0,020s
+sys     0m0,016s
+sys     0m0,015s
+sys     0m0,031s
+sys     0m0,015s
+
+real    0m4,050s
+user    0m0,014s
+sys     0m0,033s
+
+real    0m4,062s
+user    0m0,039s
+
+real    0m4,063s
+user    0m0,020s
+sys     0m0,020s
+sys     0m0,010s
+
+real    0m4,067s
+user    0m0,018s
+sys     0m0,025s
+
+real    0m4,064s
+user    0m0,016s
+sys     0m0,022s
+
+real    0m4,081s
+user    0m0,035s
+sys     0m0,006s
+
+Twenty medium files in parallel for echo5 port 1820 size 1000:
+
+real    0m3,922s
+user    0m0,021s
+sys     0m0,050s
+
+real    0m3,927s
+user    0m0,023s
+sys     0m0,039s
+
+real    0m4,045s
+user    0m0,018s
+sys     0m0,034s
+
+real    0m4,069s
+user    0m0,024s
+sys     0m0,026s
+
+real    0m4,089s
+user    0m0,024s
+sys     0m0,024s
+
+real    0m4,083s
+user    0m0,018s
+sys     0m0,036s
+
+real    0m4,121s
+user    0m0,020s
+sys     0m0,040s
+
+real    0m4,128s
+user    0m0,024s
+sys     0m0,035s
+
+real    0m4,133s
+user    0m0,023s
+sys     0m0,028s
+
+real    0m4,189s
+user    0m0,023s
+sys     0m0,035s
+
+real    0m4,199s
+user    0m0,027s
+sys     0m0,026s
+
+real    0m4,254s
+user    0m0,029s
+sys     0m0,024s
+
+real    0m4,307s
+user    0m0,023s
+
+real    0m4,320s
+user    0m0,017s
+
+real    0m4,323s
+user    0m0,018s
+sys     0m0,040s
+sys     0m0,039s
+sys     0m0,035s
+
+real    0m4,389s
+user    0m0,021s
+
+real    0m4,461s
+user    0m0,028s
+sys     0m0,028s
+sys     0m0,034s
+
+real    0m4,402s
+user    0m0,023s
+sys     0m0,037s
+
+real    0m4,571s
+user    0m0,016s
+sys     0m0,038s
+
+real    0m4,569s
+user    0m0,032s
+sys     0m0,037s
+Twenty medium files in parallel for echo5 port 1820 size 2000:
+
+real    0m3,897s
+user    0m0,027s
+sys     0m0,025s
+
+real    0m4,118s
+user    0m0,020s
+
+real    0m4,137s
+user    0m0,040s
+sys     0m0,007s
+
+real    0m4,138s
+user    0m0,034s
+sys     0m0,011s
+sys     0m0,029s
+
+real    0m4,157s
+user    0m0,024s
+sys     0m0,024s
+
+real    0m4,184s
+user    0m0,013s
+sys     0m0,035s
+
+real    0m4,236s
+user    0m0,021s
+sys     0m0,029s
+
+real    0m4,264s
+user    0m0,026s
+sys     0m0,029s
+
+real    0m4,266s
+user    0m0,025s
+sys     0m0,030s
+
+real    0m4,326s
+user    0m0,040s
+
+real    0m4,327s
+user    0m0,024s
+sys     0m0,028s
+sys     0m0,011s
+
+real    0m4,333s
+user    0m0,020s
+sys     0m0,031s
+
+real    0m4,336s
+user    0m0,016s
+sys     0m0,034s
+
+real    0m4,384s
+user    0m0,035s
+sys     0m0,026s
+
+real    0m4,436s
+user    0m0,013s
+sys     0m0,038s
+
+real    0m4,599s
+user    0m0,032s
+sys     0m0,028s
+
+real    0m4,610s
+user    0m0,024s
+sys     0m0,032s
+
+real    0m4,575s
+user    0m0,023s
+sys     0m0,034s
+
+real    0m4,626s
+user    0m0,028s
+sys     0m0,033s
+
+real    0m4,627s
+user    0m0,019s
+sys     0m0,042s
+Twenty medium files in parallel for echo5 port 1820 size 5000:
+
+real    0m3,734s
+user    0m0,014s
+sys     0m0,028s
+
+real    0m3,822s
+user    0m0,016s
+sys     0m0,024s
+
+real    0m3,857s
+user    0m0,020s
+sys     0m0,019s
+
+real    0m3,973s
+user    0m0,034s
+sys     0m0,008s
+
+real    0m4,005s
+user    0m0,032s
+sys     0m0,008s
+
+real    0m4,196s
+user    0m0,012s
+sys     0m0,030s
+
+real    0m4,288s
+user    0m0,024s
+sys     0m0,026s
+
+real    0m4,390s
+user    0m0,038s
+sys     0m0,000s
+
+real    0m4,439s
+user    0m0,029s
+sys     0m0,010s
+
+real    0m4,473s
+user    0m0,013s
+
+real    0m4,473s
+user    0m0,021s
+sys     0m0,026s
+sys     0m0,026s
+
+real    0m4,471s
+user    0m0,017s
+sys     0m0,026s
+
+real    0m4,522s
+user    0m0,012s
+
+real    0m4,524s
+user    0m0,014s
+
+real    0m4,526s
+user    0m0,026s
+sys     0m0,019s
+sys     0m0,028s
+sys     0m0,029s
+
+real    0m4,526s
+user    0m0,023s
+sys     0m0,025s
+
+real    0m4,523s
+user    0m0,009s
+sys     0m0,037s
+
+real    0m4,576s
+user    0m0,026s
+sys     0m0,019s
+
+real    0m4,489s
+user    0m0,026s
+sys     0m0,017s
+
+real    0m4,587s
+user    0m0,018s
+sys     0m0,028s
+Twenty medium files in parallel for echo5 port 1820 size 8000:
+
+real    0m3,673s
+user    0m0,018s
+sys     0m0,018s
+
+real    0m3,749s
+user    0m0,017s
+sys     0m0,017s
+
+real    0m3,808s
+user    0m0,024s
+sys     0m0,013s
+
+real    0m3,905s
+user    0m0,005s
+sys     0m0,031s
+
+real    0m3,911s
+user    0m0,012s
+sys     0m0,028s
+
+real    0m3,923s
+user    0m0,031s
+sys     0m0,008s
+
+real    0m3,932s
+user    0m0,015s
+sys     0m0,023s
+
+real    0m3,943s
+user    0m0,029s
+
+real    0m3,848s
+user    0m0,007s
+sys     0m0,032s
+sys     0m0,009s
+
+real    0m3,952s
+user    0m0,007s
+
+real    0m3,955s
+user    0m0,016s
+sys     0m0,021s
+sys     0m0,029s
+
+real    0m3,967s
+user    0m0,026s
+
+real    0m3,968s
+user    0m0,018s
+sys     0m0,023s
+sys     0m0,013s
+
+real    0m3,969s
+user    0m0,029s
+sys     0m0,009s
+
+real    0m3,989s
+user    0m0,000s
+
+real    0m3,990s
+user    0m0,015s
+sys     0m0,022s
+
+real    0m3,995s
+user    0m0,020s
+
+real    0m3,998s
+user    0m0,011s
+sys     0m0,028s
+sys     0m0,020s
+sys     0m0,037s
+
+real    0m4,003s
+user    0m0,025s
+sys     0m0,015s
+
+real    0m4,010s
+user    0m0,017s
+sys     0m0,030s
