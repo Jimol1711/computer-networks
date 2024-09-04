@@ -1,0 +1,32 @@
+En el caso de agrimed.cl, me entrega dos servidores de nombre los cuales son renare.uchile.cl (Que funciona bien) y secundario.nic.cl. Este segundo es el que reclama Dr DNS. 
+El comando 'dig ns agrimed.cl @secundario.nic.cl' entrega esto:
+
+; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> ns agrimed.cl @secundario.nic.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 12240
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: ae11321ef5eeb4bb0100000066d77b9f0283d8a99ed68fdf (good)
+;; QUESTION SECTION:
+;agrimed.cl.			IN	NS
+
+;; Query time: 4 msec
+;; SERVER: 200.7.5.7#53(secundario.nic.cl) (UDP)
+;; WHEN: Tue Sep 03 17:11:57 -04 2024
+;; MSG SIZE  rcvd: 67
+
+El error entiendo que está en el status 'SERVFAIL'. Básicamente no encuentra el nombre del servidor porque está caído.
+Luego en el caso de srcei.cl se tiene también el dominio secundario.nic.cl con el mismo problema. Además están los dominios ns.srcei.cl y infoblox01.srcei.cl
+que funcionan bien. Por último esta el dominio ns.sed.srcei.cl el cual falla por timeout imprimiendo lo siguiente:
+
+;; communications error to 119.8.144.219#53: timed out
+
+Este dominio es más problemático dado que hay dos servidores de nombre que fallan, uno es el de 'secundario' y por otra parte uno que se cae por timeout. Esta mala
+configuración genera que el resolver le pregunte a esos servidores y hacen las consultas aún más lentas que el caso por ejemplo de colina.cl.
+
+Por último está el caso de udi.cl. En este caso también se entrega el dominio secundario.nic.cl y el dominio ns1.maxtel.cl. El problema aquí es que al pregunta a ns1 por si mismo
+este se entrega solo a si mismo como servidor de nombre, lo cual podría ser un problema si el servidor se cae, dado que no tendría a secundario.nic.cl como respaldo. 
