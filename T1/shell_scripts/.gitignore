@@ -1,0 +1,7 @@
+run_servers.sh
+largefile.bin
+check_servers.sh
+local_echo4_large.sh
+kill_servers.sh
+local_echo5_large.sh
+local_echo2_large.sh
