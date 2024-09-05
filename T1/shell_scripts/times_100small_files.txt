@@ -1,0 +1,52 @@
+mié 04 sep 2024 20:40:24 -04
+One hundred small files in parallel for echo2 port 1818 size 1000:
+One hundred small files in parallel for echo2 port 1818 size 2000:
+One hundred small files in parallel echo2 port 1818 size 5000:
+One hundred small files in parallel echo2 port 1818 size 8000:
+
+
+
+Running local echo 4 100 small
+mié 04 sep 2024 20:41:00 -04
+One hundred small files in parallel for echo4 port 1819 size 1000:
+One hundred small files in parallel for echo4 port 1819 size 2000:
+One hundred small files in parallel echo4 port 1819 size 5000:
+One hundred small files in parallel echo4 port 1819 size 8000:
+
+
+
+Running local echo 5 100 small
+mié 04 sep 2024 20:41:48 -04
+One hundred small files in parallel for echo5 port 1820 size 1000:
+One hundred small files in parallel for echo5 port 1820 size 2000:
+One hundred small files in parallel echo5 port 1820 size 5000:
+One hundred small files in parallel echo5 port 1820 size 8000:
+
+
+
+mié 04 sep 2024 20:43:12 -04
+One hundred small files in parallel for echo2 port 1818 size 1000:
+One hundred small files in parallel for echo2 port 1818 size 2000:
+One hundred small files in parallel echo2 port 1818 size 5000:
+One hundred small files in parallel echo2 port 1818 size 8000:
+
+
+
+Running local echo 4 100 small
+mié 04 sep 2024 20:43:49 -04
+One hundred small files in parallel for echo4 port 1819 size 1000:
+One hundred small files in parallel for echo4 port 1819 size 2000:
+One hundred small files in parallel echo4 port 1819 size 5000:
+One hundred small files in parallel echo4 port 1819 size 8000:
+
+
+
+Running local echo 5 100 small
+mié 04 sep 2024 20:44:42 -04
+One hundred small files in parallel for echo5 port 1820 size 1000:
+One hundred small files in parallel for echo5 port 1820 size 2000:
+One hundred small files in parallel echo5 port 1820 size 5000:
+One hundred small files in parallel echo5 port 1820 size 8000:
+
+
+

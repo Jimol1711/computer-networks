@@ -1,6 +1,8 @@
 __pycache__/
 OUT*
 medium_files/
+small_files/
+big_files/
 trash/
 largefile.bin
 largefile1.bin

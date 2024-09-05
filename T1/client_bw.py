@@ -16,7 +16,7 @@ def Rdr(s, total_bytes):
 
         sys.stdout.buffer.write(data)
         received_bytes += len(data)
-    sys.stdout.buffer.flush()
+    # sys.stdout.buffer.flush()
 
 if len(sys.argv) != 4:
     print('Use: '+sys.argv[0]+' size host port')
