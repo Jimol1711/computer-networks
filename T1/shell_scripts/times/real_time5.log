@@ -1,0 +1,503 @@
+One hundred small files in parallel echo4 port 1819 size 5000:
+Traceback (most recent call last):
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 46, in <module>
+    s.send(chunk)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m3,320s
+user	0m0,018s
+sys	0m0,031s
+Traceback (most recent call last):
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 46, in <module>
+    s.send(chunk)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m2,145s
+user	0m0,016s
+sys	0m0,027s
+Traceback (most recent call last):
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 46, in <module>
+    s.send(chunk)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m2,682s
+user	0m0,006s
+sys	0m0,054s
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+
+real	0m4,585s
+user	0m0,032s
+sys	0m0,048s
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m4,772s
+user	0m0,028s
+sys	0m0,007s
+
+real	0m5,065s
+user	0m0,013s
+sys	0m0,028s
+
+real	0m5,290s
+user	0m0,021s
+sys	0m0,037s
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m5,592s
+user	0m0,017s
+sys	0m0,030s
+
+real	0m6,090s
+user	0m0,018s
+sys	0m0,022s
+
+real	0m6,096s
+user	0m0,005s
+sys	0m0,048s
+
+real	0m6,043s
+user	0m0,027s
+sys	0m0,006s
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m6,391s
+user	0m0,024s
+sys	0m0,015s
+
+real	0m5,549s
+user	0m0,032s
+sys	0m0,013s
+
+real	0m5,794s
+user	0m0,048s
+sys	0m0,066s
+
+real	0m6,767s
+user	0m0,035s
+sys	0m0,006s
+
+real	0m7,210s
+user	0m0,026s
+sys	0m0,018s
+
+real	0m5,382s
+user	0m0,026s
+sys	0m0,021s
+
+real	0m5,942s
+user	0m0,035s
+sys	0m0,009s
+
+real	0m6,461s
+user	0m0,033s
+sys	0m0,023s
+
+real	0m6,648s
+user	0m0,010s
+sys	0m0,040s
+
+real	0m5,650s
+user	0m0,028s
+sys	0m0,033s
+
+real	0m5,666s
+user	0m0,026s
+sys	0m0,026s
+
+real	0m6,104s
+user	0m0,033s
+sys	0m0,011s
+
+real	0m7,552s
+user	0m0,024s
+sys	0m0,030s
+
+real	0m7,571s
+user	0m0,033s
+sys	0m0,033s
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m8,337s
+user	0m0,016s
+sys	0m0,083s
+
+real	0m8,159s
+user	0m0,030s
+sys	0m0,012s
+
+real	0m7,699s
+user	0m0,037s
+sys	0m0,049s
+
+real	0m8,526s
+user	0m0,022s
+sys	0m0,077s
+
+real	0m8,105s
+user	0m0,032s
+sys	0m0,021s
+
+real	0m7,511s
+user	0m0,022s
+sys	0m0,046s
+
+real	0m8,578s
+user	0m0,023s
+sys	0m0,058s
+
+real	0m8,077s
+user	0m0,022s
+sys	0m0,046s
+
+real	0m7,719s
+user	0m0,022s
+sys	0m0,025s
+
+real	0m8,962s
+user	0m0,041s
+sys	0m0,024s
+
+real	0m7,660s
+user	0m0,035s
+sys	0m0,056s
+
+real	0m9,079s
+user	0m0,035s
+sys	0m0,000s
+
+real	0m7,757s
+user	0m0,022s
+sys	0m0,022s
+
+real	0m8,223s
+user	0m0,044s
+sys	0m0,008s
+
+real	0m9,178s
+user	0m0,026s
+sys	0m0,042s
+
+real	0m7,882s
+user	0m0,023s
+sys	0m0,018s
+
+real	0m8,914s
+user	0m0,018s
+sys	0m0,029s
+
+real	0m8,789s
+user	0m0,031s
+sys	0m0,011s
+
+real	0m8,324s
+user	0m0,021s
+sys	0m0,039s
+
+real	0m9,289s
+user	0m0,021s
+sys	0m0,045s
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m8,992s
+user	0m0,037s
+sys	0m0,047s
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+Exception in thread Thread-1 (Rdr):
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.11/threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 12, in Rdr
+    data=s.recv(read_write_size)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	0m10,834s
+user	0m0,023s
+sys	0m0,024s
+
+real	0m10,912s
+user	0m0,027s
+sys	0m0,053s
+
+real	0m10,788s
+user	0m0,023s
+sys	0m0,023s
+
+real	0m11,073s
+user	0m0,022s
+sys	0m0,026s
+
+real	0m11,117s
+user	0m0,017s
+sys	0m0,033s
+
+real	0m11,416s
+user	0m0,011s
+sys	0m0,038s
+
+real	0m11,321s
+user	0m0,017s
+sys	0m0,030s
+
+real	0m11,307s
+user	0m0,021s
+sys	0m0,037s
+
+real	0m11,094s
+user	0m0,022s
+sys	0m0,015s
+
+real	0m10,336s
+user	0m0,019s
+sys	0m0,019s
+
+real	0m12,037s
+user	0m0,026s
+sys	0m0,025s
+
+real	0m11,221s
+user	0m0,028s
+sys	0m0,018s
+
+real	0m12,150s
+user	0m0,054s
+sys	0m0,011s
+
+real	0m12,169s
+user	0m0,019s
+sys	0m0,065s
+
+real	0m11,702s
+user	0m0,017s
+sys	0m0,032s
+
+real	0m10,808s
+user	0m0,021s
+sys	0m0,022s
+
+real	0m12,246s
+user	0m0,008s
+sys	0m0,035s
+
+real	0m12,157s
+user	0m0,027s
+sys	0m0,030s
+
+real	0m11,513s
+user	0m0,021s
+sys	0m0,021s
+
+real	0m12,291s
+user	0m0,023s
+sys	0m0,028s
+
+real	0m11,961s
+user	0m0,046s
+sys	0m0,029s
+
+real	0m12,498s
+user	0m0,021s
+sys	0m0,029s
+
+real	0m12,436s
+user	0m0,023s
+sys	0m0,013s
+
+real	0m12,159s
+user	0m0,037s
+sys	0m0,014s
+
+real	0m13,168s
+user	0m0,027s
+sys	0m0,053s
+
+real	0m12,558s
+user	0m0,025s
+sys	0m0,016s
+
+real	0m12,729s
+user	0m0,031s
+sys	0m0,010s
+
+real	0m12,784s
+user	0m0,000s
+sys	0m0,041s
+
+real	0m11,745s
+user	0m0,025s
+sys	0m0,022s
+
+real	0m12,720s
+user	0m0,026s
+sys	0m0,020s
+
+real	0m11,448s
+user	0m0,024s
+sys	0m0,021s
+
+real	0m13,014s
+user	0m0,032s
+sys	0m0,026s
+
+real	0m13,110s
+user	0m0,024s
+sys	0m0,041s
+
+real	0m11,798s
+user	0m0,017s
+sys	0m0,032s
+
+real	0m12,237s
+user	0m0,025s
+sys	0m0,026s
+
+real	0m12,260s
+user	0m0,022s
+sys	0m0,043s
+
+real	0m12,521s
+user	0m0,025s
+sys	0m0,030s
+
+real	0m13,617s
+user	0m0,042s
+sys	0m0,028s
+
+real	0m19,415s
+user	0m0,037s
+sys	0m0,042s
+
+real	0m19,415s
+user	0m0,026s
+sys	0m0,009s
+
+real	0m20,447s
+user	0m0,026s
+sys	0m0,015s
+
+real	0m19,529s
+user	0m0,022s
+sys	0m0,014s
+
+real	0m19,166s
+user	0m0,026s
+sys	0m0,015s
+
+real	0m18,871s
+user	0m0,019s
+sys	0m0,018s
+
+real	0m19,927s
+user	0m0,023s
+sys	0m0,016s
+
+real	0m20,209s
+user	0m0,021s
+sys	0m0,018s
+
+real	0m20,622s
+user	0m0,034s
+sys	0m0,016s
+
+real	0m20,103s
+user	0m0,015s
+sys	0m0,019s
+
+real	0m19,924s
+user	0m0,035s
+sys	0m0,001s
+
+real	0m20,396s
+user	0m0,027s
+sys	0m0,007s
+
+real	0m20,079s
+user	0m0,005s
+sys	0m0,042s
+
+real	0m18,594s
+user	0m0,028s
+sys	0m0,008s
+
+real	0m20,222s
+user	0m0,013s
+sys	0m0,032s
+
+real	0m19,910s
+user	0m0,016s
+sys	0m0,021s

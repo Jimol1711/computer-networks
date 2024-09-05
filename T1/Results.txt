@@ -1,0 +1,36 @@
+Tarea 1 - CC4303 Redes - Primavera 2024
+
+Estudiante: Juan Molina
+Profesor: José M. Piquer
+
+Este archivo responde a las preguntas de la Tarea 1 sobre los experimentos realizados. 
+
+1. Los experimentos consisten en enviar datos de archivos binarios a través de un cliente con diferentes 
+tamaños de lectura y escritura y medir la performance en términos de tiempo para cada caso particular
+y en cada tipo de servidor. Mediante una serie de scripts shell se hicieron las mediciones. Para esto,
+Se separo en el caso local y en el caso remoto. 
+
+Para los locales se creo un script shell que corre los servers server_echo2.py, server_echo4.py y 
+server_echo5.py en localhost 1818, 1819 y 1820 respectivamente (Aquí se modificaron los servers 4 y 5 
+para que corran en 1819 y 1820 para tenerlos todos al mismo tiempo, pero fue la única modificación que 
+se hizo y no parece tener efectos en la performance por lo que lo dejé así). Una vez están corriendo, 
+se ejecutan distintos script shells para cada caso. Los casos son 1 archivo grande, 3 archivos grandes, 
+20 archivos medianos y 100 archivos pequeños en paralelo. Se envían los archivos con el cliente 
+client_bw.py en paralelo a cada servidor, los archivos de salida se guardan en el directorio trash y 
+se guardan los tiempos que declara el comando time en archivos .txt. Se calcula un promedio de los 
+tiempos para cuando son muchos archivos (Esto me hizo sentido ya que en general dan tiempos uniformes
+sin outliers, entonces el promedio debería ser bastante estándar).
+
+Si se quieren probar los experimentos primero se debe otorgar permisos a todos los scripts. Esto se puede
+hacer con el comando chmod +x *.sh.
+
+Respecto al computador, se probó en varios, pero el principal corresponde a un Acer Aspire 5, con
+procesador Intel Core i5 de 4 cores y 12 GB de RAM. Se probó en una máquina virtual con la distribución
+Debian 12 de Linux. Esta máquina solo utiliza 2 GB de RAM aproximadamente por lo que no se utilizó
+la totalidad de la memoria principal disponible.
+
+2.
+
+3.
+
+4.
