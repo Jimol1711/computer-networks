@@ -3,6 +3,9 @@ OUT*
 medium_files/
 small_files/
 big_files/
+big_remote_files/
+medium_remote_files/
+small_remote_files/
 trash/
 largefile.bin
 largefile1.bin
