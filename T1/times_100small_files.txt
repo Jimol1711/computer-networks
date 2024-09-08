@@ -1,0 +1,17 @@
+One hundred small files in parallel for echo2 port 1818:
+size 1000 -> real	0m36,777s
+size 2000 -> real	0m28,479s
+size 5000 -> real	0m25,360s
+size 8000 -> real	0m23,700s
+
+One hundred small files in parallel for echo4 port 1819:
+size 1000 -> real	0m39,615s
+size 2000 -> real	0m23,490s
+size 5000 -> real	0m23,737s
+size 8000 -> real	0m23,407s
+
+One hundred small files in parallel for echo5 port 1820:
+size 1000 -> real	0m39,480s
+size 2000 -> real	0m26,494s
+size 5000 -> real	0m40,664s
+size 8000 -> real	0m40,912s

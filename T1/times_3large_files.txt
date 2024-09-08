@@ -1,16 +1,16 @@
-Three large files in parallel for echo2 port 1818:
+Three large files in parallel for local echo2 port 1818:
 size 1000 -> real    0m10,223s
 size 2000 -> real    0m11,178s
 size 5000 -> real    0m10,261s
 size 8000 -> real    0m10,587s
 
-Three large files in parallel for echo4 port 1819:
+Three large files in parallel for local echo4 port 1819:
 size 1000 -> real    0m17,473s
 size 2000 -> real    0m11,532s
 size 5000 -> real    0m11,166s
 size 8000 -> real    0m15,454s
 
-Three large files in parallel for echo5 port 1820:
+Three large files in parallel for local echo5 port 1820:
 size 1000 -> real    0m15,080s
 size 2000 -> real    0m11,556s
 size 5000 -> real    0m16,821s

@@ -1,16 +1,16 @@
-Single large file experiment for echo2 port 1818:
+Single large file experiment for local echo2 port 1818:
 size 1000 -> real    0m5,751s
 size 2000 -> real    0m5,962s
 size 5000 -> real    0m4,691s
 size 8000 -> real    0m4,975s
 
-Single large file experiment for echo4 port 1819
+Single large file experiment for local echo4 port 1819
 size 1000 -> real    0m5,656s
 size 2000 -> real    0m5,777s
 size 5000 -> real    0m5,171s
 size 8000 -> real    0m4,162s
 
-Single large file experiment for echo5 port 1820:
+Single large file experiment for local echo5 port 1820:
 size 1000 -> real    0m6,017s
 size 2000 -> real    0m5,196s
 size 5000 -> real    0m5,329s
