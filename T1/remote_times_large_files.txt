@@ -1,0 +1,17 @@
+Single large file experiment for anakena echo2 port 1818:
+size 1000 -> real    0m42,200s
+size 2000 -> real    0m23,300s
+size 5000 -> real    0m24,877s
+size 8000 -> real    0m23,060s
+
+Single large file experiment for anakena echo4 port 1819
+size 1000 -> real    0m23,306s
+size 2000 -> real    0m25,199s
+size 5000 -> real    0m23,781s
+size 8000 -> real    0m25,382s
+
+Single large file experiment for anakena echo5 port 1820:
+size 1000 -> real    0m35,414s
+size 2000 -> real    0m22,998s
+size 5000 -> real    0m24,482s
+size 8000 -> real    0m23,155s

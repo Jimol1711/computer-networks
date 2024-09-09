@@ -1,0 +1,409 @@
+One hundred small files in parallel for anakena echo5 port 1820 size 2000:
+
+real	1m12,283s
+user	0m0,012s
+sys	0m0,193s
+
+real	1m13,162s
+user	0m0,018s
+sys	0m0,192s
+
+real	1m13,218s
+user	0m0,012s
+sys	0m0,141s
+
+real	1m13,569s
+user	0m0,012s
+sys	0m0,178s
+
+real	1m13,951s
+user	0m0,014s
+sys	0m0,082s
+
+real	1m14,285s
+user	0m0,014s
+sys	0m0,255s
+
+real	1m14,583s
+user	0m0,016s
+sys	0m0,089s
+
+real	1m15,067s
+user	0m0,015s
+sys	0m0,163s
+
+real	1m15,426s
+user	0m0,023s
+sys	0m0,080s
+
+real	1m15,661s
+user	0m0,005s
+sys	0m0,192s
+
+real	1m15,888s
+user	0m0,013s
+sys	0m0,199s
+
+real	1m17,176s
+user	0m0,007s
+sys	0m0,198s
+
+real	1m16,899s
+user	0m0,008s
+sys	0m0,113s
+
+real	1m18,979s
+user	0m0,008s
+sys	0m0,096s
+
+real	1m19,860s
+user	0m0,013s
+sys	0m0,147s
+
+real	1m20,228s
+user	0m0,010s
+sys	0m0,080s
+
+real	1m20,927s
+user	0m0,012s
+sys	0m0,110s
+
+real	1m21,635s
+user	0m0,012s
+sys	0m0,243s
+
+real	1m22,001s
+user	0m0,013s
+sys	0m0,168s
+
+real	1m24,739s
+user	0m0,013s
+sys	0m0,197s
+
+real	1m24,410s
+user	0m0,020s
+sys	0m0,065s
+
+real	1m24,817s
+user	0m0,016s
+sys	0m0,140s
+
+real	1m25,985s
+user	0m0,011s
+sys	0m0,171s
+
+real	1m26,544s
+user	0m0,013s
+sys	0m0,079s
+
+real	1m27,196s
+user	0m0,024s
+sys	0m0,062s
+
+real	1m27,228s
+user	0m0,011s
+sys	0m0,183s
+
+real	1m28,273s
+user	0m0,008s
+sys	0m0,113s
+
+real	1m29,670s
+user	0m0,020s
+sys	0m0,130s
+
+real	1m29,628s
+user	0m0,018s
+sys	0m0,071s
+
+real	1m29,939s
+user	0m0,017s
+sys	0m0,070s
+
+real	1m30,150s
+user	0m0,010s
+sys	0m0,173s
+
+real	1m30,401s
+user	0m0,013s
+sys	0m0,152s
+
+real	1m30,694s
+user	0m0,008s
+sys	0m0,163s
+
+real	1m30,984s
+user	0m0,013s
+sys	0m0,113s
+
+real	1m31,066s
+user	0m0,020s
+sys	0m0,063s
+
+real	1m31,515s
+user	0m0,010s
+sys	0m0,159s
+
+real	1m32,560s
+user	0m0,019s
+sys	0m0,055s
+
+real	1m32,983s
+user	0m0,008s
+sys	0m0,079s
+
+real	1m33,285s
+user	0m0,014s
+sys	0m0,142s
+
+real	1m33,736s
+user	0m0,005s
+sys	0m0,161s
+
+real	1m34,965s
+user	0m0,021s
+sys	0m0,061s
+
+real	1m37,566s
+user	0m0,022s
+sys	0m0,051s
+
+real	1m37,699s
+user	0m0,000s
+sys	0m0,067s
+
+real	1m38,246s
+user	0m0,013s
+sys	0m0,088s
+
+real	1m39,345s
+user	0m0,008s
+sys	0m0,103s
+
+real	1m39,690s
+user	0m0,012s
+sys	0m0,191s
+
+real	1m39,954s
+user	0m0,010s
+sys	0m0,067s
+
+real	1m42,065s
+user	0m0,015s
+sys	0m0,065s
+
+real	1m43,562s
+user	0m0,008s
+sys	0m0,111s
+Traceback (most recent call last):
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 46, in <module>
+    s.send(chunk)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	1m42,283s
+user	0m0,029s
+sys	0m0,024s
+
+real	1m47,423s
+user	0m0,014s
+sys	0m0,071s
+
+real	1m46,496s
+user	0m0,018s
+sys	0m0,113s
+
+real	1m46,819s
+user	0m0,028s
+sys	0m0,078s
+
+real	1m47,383s
+user	0m0,015s
+sys	0m0,113s
+Traceback (most recent call last):
+  File "/home/pss/Escritorio/repos/Redes/T1/shell_scripts/../client_bw.py", line 46, in <module>
+    s.send(chunk)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+real	1m45,879s
+user	0m0,026s
+sys	0m0,022s
+
+real	1m47,963s
+user	0m0,010s
+sys	0m0,124s
+
+real	1m48,145s
+user	0m0,017s
+sys	0m0,116s
+
+real	1m50,420s
+user	0m0,029s
+sys	0m0,040s
+
+real	1m50,908s
+user	0m0,024s
+sys	0m0,067s
+
+real	1m51,033s
+user	0m0,023s
+sys	0m0,108s
+
+real	1m52,628s
+user	0m0,017s
+sys	0m0,049s
+
+real	1m53,331s
+user	0m0,022s
+sys	0m0,044s
+
+real	1m53,373s
+user	0m0,014s
+sys	0m0,106s
+
+real	1m57,391s
+user	0m0,028s
+sys	0m0,034s
+
+real	2m4,115s
+user	0m0,001s
+sys	0m0,305s
+
+real	2m4,171s
+user	0m0,012s
+sys	0m0,242s
+
+real	2m4,869s
+user	0m0,011s
+sys	0m0,302s
+
+real	2m3,024s
+user	0m0,012s
+sys	0m0,066s
+
+real	2m5,287s
+user	0m0,004s
+sys	0m0,158s
+
+real	2m5,399s
+user	0m0,013s
+sys	0m0,151s
+
+real	2m5,466s
+user	0m0,008s
+sys	0m0,149s
+
+real	2m3,510s
+user	0m0,017s
+sys	0m0,116s
+
+real	2m4,082s
+user	0m0,018s
+sys	0m0,108s
+
+real	2m3,948s
+user	0m0,006s
+sys	0m0,050s
+
+real	2m5,531s
+user	0m0,017s
+sys	0m0,094s
+
+real	2m5,717s
+user	0m0,021s
+sys	0m0,084s
+
+real	2m6,421s
+user	0m0,018s
+sys	0m0,087s
+
+real	2m6,670s
+user	0m0,015s
+sys	0m0,081s
+
+real	2m6,542s
+user	0m0,008s
+sys	0m0,099s
+
+real	2m7,944s
+user	0m0,015s
+sys	0m0,084s
+
+real	2m7,376s
+user	0m0,018s
+sys	0m0,050s
+
+real	2m11,266s
+user	0m0,028s
+sys	0m0,075s
+
+real	2m11,238s
+user	0m0,023s
+sys	0m0,087s
+
+real	2m11,198s
+user	0m0,006s
+sys	0m0,101s
+
+real	2m11,332s
+user	0m0,030s
+sys	0m0,044s
+
+real	2m10,978s
+user	0m0,026s
+sys	0m0,035s
+
+real	2m11,316s
+user	0m0,015s
+sys	0m0,092s
+
+real	2m12,407s
+user	0m0,018s
+sys	0m0,076s
+
+real	2m13,074s
+user	0m0,019s
+sys	0m0,090s
+
+real	2m12,869s
+user	0m0,020s
+sys	0m0,083s
+
+real	2m14,158s
+user	0m0,021s
+sys	0m0,049s
+
+real	2m14,494s
+user	0m0,028s
+sys	0m0,064s
+
+real	2m14,544s
+user	0m0,013s
+sys	0m0,039s
+
+real	2m14,370s
+user	0m0,010s
+sys	0m0,058s
+
+real	2m16,623s
+user	0m0,026s
+sys	0m0,076s
+
+real	2m17,797s
+user	0m0,013s
+sys	0m0,020s
+
+real	2m18,268s
+user	0m0,019s
+sys	0m0,018s
+
+real	2m19,399s
+user	0m0,026s
+sys	0m0,012s
+
+real	2m20,562s
+user	0m0,020s
+sys	0m0,019s
+
+real	2m21,853s
+user	0m0,024s
+sys	0m0,014s

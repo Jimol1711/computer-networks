@@ -1,0 +1,17 @@
+Twenty medium files in parallel for anakena echo2 port 1818:
+size 1000 -> real    0m51,259s
+size 2000 -> real    0m29,707s
+size 5000 -> real    0m27,551s
+size 8000 -> real    0m28,622s
+
+Twenty medium files in parallel for anakena echo4 port 1819:
+size 1000 -> real    0m48,347s
+size 2000 -> real    0m31,277s
+size 5000 -> real    0m27,916s
+size 8000 -> real    0m28,589s
+
+Twenty medium files in parallel for anakena echo5 port 1820:
+size 1000 -> real    0m56,492s
+size 2000 -> real    0m45,667s
+size 5000 -> real    0m35,566s
+size 8000 -> real    0m34,523s

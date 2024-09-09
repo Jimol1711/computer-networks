@@ -1,0 +1,17 @@
+Three large files in parallel for anakena echo2 port 1818:
+size 1000 -> real    1m6,328s
+size 2000 -> real    1m4,758s
+size 5000 -> real    1m4,581s
+size 8000 -> real    1m1,352s
+
+Three large files in parallel for anakena echo4 port 1819:
+size 1000 -> real    1m5,601s
+size 2000 -> real    1m9,555s
+size 5000 -> real    1m10,538s
+size 8000 -> real    1m6,810s
+
+Three large files in parallel for anakena echo5 port 1820:
+size 1000 -> real    1m18,706s
+size 2000 -> real    1m10,220s
+size 5000 -> real    1m54,813s
+size 8000 -> real    1m6,391s

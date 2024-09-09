@@ -1,0 +1,17 @@
+One hundred small files in parallel for anakena echo2 port 1818 size 1000:
+size 1000 -> real	1m51,814s
+size 2000 -> real	2m19,763s
+size 5000 -> real	2m14,766s
+size 8000 -> real	1m31,135s
+
+One hundred small files in parallel for anakena echo4 port 1819:
+size 1000 -> real	1m40,153s
+size 2000 -> real	1m43,844s
+size 5000 -> real	2m15,843s
+size 8000 -> real	2m17,734s
+
+One hundred small files in parallel for anakena echo5 port 1820:
+size 1000 -> real	2m29,451s
+size 2000 -> real	2m21,853s
+size 5000 -> real	2m29,516s
+size 8000 -> real	2m18,873s
