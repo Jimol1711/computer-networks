@@ -41,7 +41,7 @@ def parse_and_analyze(filename):
     return results
 
 # Example usage
-filename = 'shell_scripts/times/real_time8.txt'
+filename = 'shell_scripts/times/real_time5.txt'
 results = parse_and_analyze(filename)
 
 for i, (avg, highest) in enumerate(results, 1):
