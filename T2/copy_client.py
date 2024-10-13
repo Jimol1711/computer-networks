@@ -12,16 +12,17 @@ seq_num = 0
 last_acked = -1
 timed_out = False
 
+# function to redefine timeout
 def timeout(rtt):
     return rtt * 3
 
-def Rdr(s, total_bytes):
+def Rdr(s, num_bytes):
     global last_acked
     received_bytes = 0
     start_time = time.time()
     rtt = 0.5  # Initial RTT estimate for timeout
 
-    while received_bytes < total_bytes:
+    while received_bytes < num_bytes:
         try:
             data, addr = s.recvfrom(pack_sz)
             if not data:
@@ -54,9 +55,9 @@ if len(sys.argv) != 5:
     sys.exit(1)
 
 pack_sz = int(sys.argv[1]) - 2  # Subtract 2 bytes for sequence number
-win = int(sys.argv[2])
-host = sys.argv[3]
-port = int(sys.argv[4])
+win = int(sys.argv[2]) # Window size
+host = sys.argv[3] # host server
+port = int(sys.argv[4]) # port to read/write from/to
 
 s = jsockets.socket_udp_connect(host, port)
 
@@ -64,11 +65,11 @@ if s is None:
     print('could not open socket')
     sys.exit(1)
 
-input_data = sys.stdin.buffer.read()
-total_bytes = len(input_data)
+total_bytes = len(sys.stdin.buffer.read())
+input_data = sys.stdin.buffer.read(pack_sz)
 
 # Creo thread que lee desde el socket hacia stdout:
-reader_thread = threading.Thread(target=Rdr, args=(s, total_bytes))
+reader_thread = threading.Thread(target=Rdr, args=(s, pack_sz))
 reader_thread.start()
 
 # Sending thread - adding sequence number
@@ -120,5 +121,5 @@ print(f'Used: pack: {pack_sz + 2}, maxwin: {win}')
 print(f'Send errors: {len(send_window)}')
 print(f'Receive errors: {len(recv_window)}')
 
-time.sleep(3)  # dar tiempo para que vuelva la respuesta
+time.sleep(3) # dar tiempo para que vuelva la respuesta
 s.close()

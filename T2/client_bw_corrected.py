@@ -5,18 +5,15 @@ import jsockets
 import sys, threading
 import time
 
-def Rdr(s, total_bytes):
-    received_bytes = 0
-    while received_bytes < total_bytes:
-
-        data=s.recv(read_write_size)
+def Rdr(s):
+    while True:
+        data = s.recv(read_write_size)
 
         if not data: 
             break
 
         sys.stdout.buffer.write(data)
-        received_bytes += len(data)
-    # sys.stdout.buffer.flush()
+        # sys.stdout.buffer.flush()
 
 if len(sys.argv) != 4:
     print('Use: '+sys.argv[0]+' size host port')
@@ -24,27 +21,27 @@ if len(sys.argv) != 4:
 
 read_write_size = int(sys.argv[1])
 host = sys.argv[2]
-port = sys.argv[3]
+port = int(sys.argv[3])
 
-s = jsockets.socket_tcp_connect(host, port)
+s = jsockets.socket_udp_connect(host, port)
 
 if s is None:
     print('could not open socket')
     sys.exit(1)
 
-input_data = sys.stdin.buffer.read()
-total_bytes = len(input_data)
-
 # Creo thread que lee desde el socket hacia stdout:
-reader_thread = threading.Thread(target=Rdr, args=(s, total_bytes))
+reader_thread = threading.Thread(target=Rdr, args=(s,))
 reader_thread.start()
 
-# En este otro thread leo desde stdin hacia socket:
-sent_bytes = 0
-for i in range(0, total_bytes, read_write_size):
-    chunk = input_data[i:i+read_write_size]
+# En este otro thread leo desde stdin hacia socket por bloques:
+while True:
+    # Leer read_write_size bytes desde stdin
+    chunk = sys.stdin.buffer.read(read_write_size)
+    if not chunk:
+        break  # Si ya no hay más datos, salir del bucle
+
+    # Enviar el chunk leído al socket
     s.send(chunk)
-    sent_bytes += len(chunk)
 
 reader_thread.join()
 
