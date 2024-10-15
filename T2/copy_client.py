@@ -5,26 +5,28 @@ import jsockets
 import sys, threading, time, struct
 
 # Shared memory variables
-lock = threading.Lock()
-send_window = []
-recv_window = []
-seq_num = 0
-last_acked = -1
-timed_out = False
+lock = threading.Lock()  # Mutex for shared memory access
+send_window = []  # Sequence numbers of sent but not yet received packets
+recv_window = []  # To store received sequence numbers (for simulation purposes)
+seq_num = 0  # Sequence number of the next packet to send
+last_acked = -1  # Last sequence number that was successfully received back
+timed_out = False  # Flag for handling timeout and retransmission
+finished_sending = False  # Flag for signaling when sending is complete
 
 # function to redefine timeout
-def timeout(rtt):
+def adaptative_timeout(rtt):
     return rtt * 3
 
 def Rdr(s, num_bytes):
-    global last_acked
+    global last_acked, timed_out
     received_bytes = 0
     start_time = time.time()
     rtt = 0.5  # Initial RTT estimate for timeout
 
     while received_bytes < num_bytes:
         try:
-            data, addr = s.recvfrom(pack_sz)
+            # Receive data from the server
+            data, addr = s.recvfrom(pack_sz + 2)
             if not data:
                 break
             # Extract the sequence number from the first 2 bytes
@@ -36,17 +38,17 @@ def Rdr(s, num_bytes):
                     sys.stdout.buffer.write(packet_data)
                     received_bytes += len(packet_data)
                     last_acked = seq_num_received  # Update the last acknowledged packet
+                    recv_window.append(last_acked)  # Store received sequence number for tracking
 
             # Update RTT and adaptive timeout
             end_time = time.time()
-            rtt = timeout(end_time - start_time)
+            rtt = adaptative_timeout(end_time - start_time)
             start_time = end_time
 
             # Reset timed_out flag if data is successfully received
             timed_out = False
 
         except Exception as e:
-            # Simulating a general failure instead of using socket.timeout
             print("Error receiving data:", str(e))
             break
 
