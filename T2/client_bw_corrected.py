@@ -9,11 +9,14 @@ def Rdr(s):
     while True:
         data = s.recv(read_write_size)
 
-        if not data: 
+        if not data:
+            print("Finished receiving data")
             break
 
         sys.stdout.buffer.write(data)
-        # sys.stdout.buffer.flush()
+
+        # flush is necessary
+        sys.stdout.buffer.flush()
 
 if len(sys.argv) != 4:
     print('Use: '+sys.argv[0]+' size host port')
@@ -37,11 +40,11 @@ reader_thread.start()
 while True:
     # Leer read_write_size bytes desde stdin
     chunk = sys.stdin.buffer.read(read_write_size)
-    if not chunk:
+    if chunk == b'':
         break  # Si ya no hay más datos, salir del bucle
 
     # Enviar el chunk leído al socket
-    s.send(chunk)
+    s.sendto(chunk, (host, port))
 
 reader_thread.join()
 
