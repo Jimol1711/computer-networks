@@ -10,7 +10,7 @@ lock = threading.Lock()
 send_window = []
 total_sent_bytes = 0
 seq_num = 0
-window_size = 0
+win = 0
 retransmissions = 0  # Counter for retransmissions
 
 # Receiver thread function
@@ -50,7 +50,7 @@ if len(sys.argv) != 5:
     sys.exit(1)
 
 pack_sz = int(sys.argv[1]) - 2  # Subtract 2 bytes for sequence number
-window_size = int(sys.argv[2])
+win = int(sys.argv[2])
 host = sys.argv[3]
 port = int(sys.argv[4])
 
@@ -82,9 +82,9 @@ for chunk in input_data_chunks:
     while True:
         with lock:
             # Calculate the current size of the send window
-            current_window_size = sum(len(packet) for packet in send_window) + len(chunk) + 2  # +2 for sequence number
+            current_win = sum(len(packet) for packet in send_window) + len(chunk) + 2  # +2 for sequence number
 
-            if current_window_size <= window_size:  # Check if the total size in bytes is within window size
+            if current_win <= win:  # Check if the total size in bytes is within window size
                 # Add sequence number (2 bytes) to the chunk using int.to_bytes()
                 data_with_seq = seq_num.to_bytes(2, 'big') + chunk
                 s.sendto(data_with_seq, (host, port))
@@ -100,7 +100,7 @@ for chunk in input_data_chunks:
         # Retransmission logic
         with lock:
             # Retransmit packets if the send window is full
-            if len(send_window) >= window_size:
+            if len(send_window) >= win:
                 print(f"Retransmitting packet seq_num: {send_window[0][0]}")  # Debug print
                 # Retransmit the first packet in the send window
                 s.sendto(send_window[0][1], (host, port))  # Resend the first packet

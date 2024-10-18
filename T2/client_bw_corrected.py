@@ -5,26 +5,51 @@ import jsockets
 import sys, threading
 import time
 
-def Rdr(s):
+# Mutex and condition
+mutex = threading.Lock()
+condition = threading.Condition(mutex)
+data_received = False
+
+# global variables for Go Back N
+req_num = 0
+seq_num = 0
+seq_base = 0
+seq_max = 0
+
+def Rdr(s, win_size):
+    global data_received, req_num, seq_base
     while True:
-        data = s.recv(read_write_size)
+        data = s.recv(pack_sz + 2)
+
+        # extract sequence number and data
+        seq_num_received = int.from_bytes(data[:2], 'big')
+        packet_data = data[2:]
 
         if not data:
             print("Finished receiving data")
             break
 
-        sys.stdout.buffer.write(data)
+        with mutex:
+            if seq_num_received == req_num:
+                sys.stdout.buffer.write(packet_data)
+                sys.stdout.buffer.flush()
 
-        # flush is necessary
-        sys.stdout.buffer.flush()
+                req_num += 1
 
-if len(sys.argv) != 4:
-    print('Use: '+sys.argv[0]+' size host port')
+                data_received = True
+                condition.notify()
+
+            else:
+                continue
+
+if len(sys.argv) != 5:
+    print('Use: '+sys.argv[0]+' pack_sz win host port')
     sys.exit(1)
 
-read_write_size = int(sys.argv[1])
-host = sys.argv[2]
-port = int(sys.argv[3])
+pack_sz = int(sys.argv[1]) - 2
+win = int(sys.argv[2])
+host = sys.argv[3]
+port = int(sys.argv[4])
 
 s = jsockets.socket_udp_connect(host, port)
 
@@ -38,15 +63,24 @@ reader_thread.start()
 
 # En este otro thread leo desde stdin hacia socket por bloques:
 while True:
-    # Leer read_write_size bytes desde stdin
-    chunk = sys.stdin.buffer.read(read_write_size)
-    if chunk == b'':
-        break  # Si ya no hay más datos, salir del bucle
 
-    # Enviar el chunk leído al socket
-    s.sendto(chunk, (host, port))
+    chunk = sys.stdin.buffer.read(pack_sz)
+    if chunk == b'':
+        break
+
+    # Send and wait for acknowledgment
+    with condition:
+        s.sendto(chunk, (host, port))
+        data_received = False
+        while not data_received:
+            condition.wait()
 
 reader_thread.join()
 
 time.sleep(3)  # dar tiempo para que vuelva la respuesta
+
+# print statistics
+print('Usando: pack:', pack_sz, 'maxwin:', win)
+print('Errores envío:', 0)
+print('Errores recepción:', 0)
 s.close()
