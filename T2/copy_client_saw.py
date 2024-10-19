@@ -1,6 +1,6 @@
-# Stop and Wait
 #!/usr/bin/python3
 # Echo client program
+# Stop and Wait sin pérdidas
 # Version con dos threads: uno lee de stdin hacia el socket y el otro al revés
 import jsockets
 import sys, threading
@@ -10,6 +10,9 @@ import time
 mutex = threading.Lock()
 condition = threading.Condition(mutex)
 data_received = False
+# timeout = 0.5
+# RTT = 0
+# retransmissions = 0
 
 def Rdr(s):
     global data_received
@@ -17,8 +20,8 @@ def Rdr(s):
         data = s.recv(pack_sz + 2)
 
         # extract sequence number and data
-        seq_num_received = int.from_bytes(data[:2], 'big')
-        packet_data = data[2:]
+        # seq_num_received = int.from_bytes(data[:2], 'big')
+        # packet_data = data[2:]
 
         if not data:
             print("Finished receiving data")
@@ -39,7 +42,7 @@ if len(sys.argv) != 5:
     sys.exit(1)
 
 pack_sz = int(sys.argv[1]) - 2
-win = int(sys.argv[2])
+win = int(sys.argv[2]) # Not used
 host = sys.argv[3]
 port = int(sys.argv[4])
 
@@ -62,10 +65,17 @@ while True:
 
     # Send and wait for acknowledgment
     with condition:
+        # start_time = time.time()
         s.sendto(chunk, (host, port))
         data_received = False
+
+        # Wait for acknowledgment
         while not data_received:
-            condition.wait()
+            condition.wait() # aquí iría timeout, pero dado que no hay perdidas no lo pongo
+
+        # rtt = time.time() - start_time
+        # RTT = rtt
+        # timeout = RTT * 3
 
 reader_thread.join()
 
