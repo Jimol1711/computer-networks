@@ -32,10 +32,11 @@ timeout = 0.5
 unacked_packets = {}
 
 # retransmissions and final packet flags
-retransmissions = 0 # Esta variable no se está modificando
+num_retransmissions = 0 # Esta variable no se está modificando
+num_out_of_order = 0
 final_packet_sent = False
 final_packet_acked = False
-terminate_program = False 
+terminate_program = False
 
 # Receiver function
 def Rdr(s):
@@ -62,7 +63,7 @@ def Rdr(s):
                     # Esto nunca se imprime, pero sería lo correcto
                     print(f"Final packet received (Seq: {seq_num_received}). Exiting.")
                     print('Using: pack:', pack_sz, 'maxwin:', win)
-                    print('Send errors:', retransmissions)
+                    print('Send errors:', num_retransmissions)
                     print('Receive errors:', 0) # esto está en 0 porque aún estoy viendo como detectar los errores de recibo
                     sys.stdout.flush()
 
@@ -95,7 +96,7 @@ with mutex:
 def resend_unacked_packets():
     global seq_base, retransmissions
     with mutex:
-        retransmissions += 1
+        num_retransmissions += 1
         print("Timeout! Resending unacknowledged packets from", seq_base)
         sys.stdout.flush()
         for sn in range(seq_base, seq_num):
@@ -124,7 +125,7 @@ while True:
                 # El tema es que esto no necesariamente está bien porque no sé
                 # si el paquete vacío esta acked
                 print('Using: pack:', pack_sz, 'maxwin:', win)
-                print('Send errors:', retransmissions)
+                print('Send errors:', num_retransmissions)
                 print('Receive errors:', 0)
                 sys.stdout.flush()
                 seq_num += 1
@@ -164,9 +165,10 @@ with condition:
 reader_thread.join()
 
 # Esto nunca se imprime
-print('Using: pack:', pack_sz, 'maxwin:', win)
-print('Send errors:', retransmissions)
-print('Receive errors:', 0)
+print('Using: pack:', pack_sz + 2, 'maxwin:', win)
+print('Send errors:', num_retransmissions)
+print('Receive errors:', num_out_of_order)
 sys.stdout.flush()
-s.close()
 
+# closing connection
+s.close()
