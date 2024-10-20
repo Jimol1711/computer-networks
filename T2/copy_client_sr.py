@@ -209,6 +209,12 @@ def Sender(s):
             empty_packet = seq_num.to_bytes(2, 'big')
             s.send(empty_packet)
             all_data_sent = True
+            # final stats and closing
+            print('Empty packet seq num:', seq_num)
+            print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win)
+            print('Send errors:', num_retransmissions)
+            print('Receive errors:', num_out_of_order)
+            sys.stdout.flush()
             break
 
         # Build the packet: seq_num + data
