@@ -158,6 +158,8 @@ timeout = 0.5
 num_retransmissions = 0
 num_out_of_order = 0
 
+
+
 # windows
 send_window = [None] * win
 receive_window = [None] * win
@@ -193,6 +195,7 @@ def adapt_window(window, new_element):
 
 # ADDED
 # Sender thread logic
+"""
 def Sender(s):
 
     global num_retransmissions, all_data_sent
@@ -233,9 +236,11 @@ def Sender(s):
         # Wait for an adaptive timeout before sending the next packet
         rtt = adapt_timeout(time.time() - start_time)
         time.sleep(rtt)
+"""
 # ENDADDED
 
 # ADDED
+"""
 # Receiver thread logic
 def Receiver(s):
     global num_out_of_order, all_data_received
@@ -269,28 +274,51 @@ def Receiver(s):
             print('Send errors:', num_retransmissions, file=sys.stderr)
             print('Receive errors:', num_out_of_order, file=sys.stderr)
             break
+"""
 # ENDADDED
 
-# REMOVED
-"""
+# MINE
 # function to receive packets
-def Rdr(s):
+def Receiver(s):
 
-    # HERE SHOULD BE IMPLEMENTED LOGIC FOR RECEIVER THREAD
+    global req_num, receive_window, num_out_of_order
+
+    # selective repeat logic for receiver thread
     while True:
         data = s.recv(pack_sz + 2)        
         
         if not data:
-            print("No more data, exiting receiver")
+            print("Error: no data", file=sys.stderr)
             break
 
         # seq num and data
         seq_num_received = int.from_bytes(data[:2], 'big')
         packet_data = data[2:]
 
+        if not packet_data:
+            print("final packet received", file=sys.stderr)
+            # Aquí implementar lo que pasa cuando faltan paquetes por recibir en la ventana
+            break
+
+        if seq_num_received == req_num:
+            sys.stdout.buffer.write(packet_data)
+            req_num += 1
+
+            while receive_window[req_num] is not None:
+                sys.stdout.buffer.write(receive_window[req_num])
+                req_num += 1
+                receive_window[req_num] = None
+
+        elif seq_num_received > req_num:
+            receive_window[seq_num_received] = packet_data
+            num_out_of_order += 1
+
+        else:
+            num_out_of_order += 1
+            continue
+
     return
-"""
-# ENDREMOVED
+# ENDMINE
 
 # connection
 s = jsockets.socket_udp_connect(host, port)
