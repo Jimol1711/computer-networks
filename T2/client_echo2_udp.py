@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Echo client UDP program
-import jsockets
+import Redes.T2.files.jsockets as jsockets
 import sys
 
 if len(sys.argv) != 3:

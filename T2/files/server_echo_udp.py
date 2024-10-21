@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Echo server UDP program - version of server_echo_udp.c, mono-cliente
-import jsockets
+import Redes.T2.files.jsockets as jsockets
 import sys # Se importó el módulo sys que no estaba importado
 
 s = jsockets.socket_udp_bind(1818)

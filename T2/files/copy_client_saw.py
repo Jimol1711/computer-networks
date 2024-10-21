@@ -2,7 +2,7 @@
 # Echo client program
 # Stop and Wait sin pérdidas
 # Version con dos threads: uno lee de stdin hacia el socket y el otro al revés
-import jsockets
+import Redes.T2.files.jsockets as jsockets
 import sys, threading
 import time
 

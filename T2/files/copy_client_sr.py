@@ -133,7 +133,7 @@ s.close()
 """
 
 # Selective Repeat
-import jsockets
+import Redes.T2.files.jsockets as jsockets
 import sys, threading, time
 
 # error handling

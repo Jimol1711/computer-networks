@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Echo client program
 # Version with two threads: one reads from stdin to the socket and the other does the reverse
-import jsockets
+import Redes.T2.files.jsockets as jsockets
 import sys, threading
 import time
 

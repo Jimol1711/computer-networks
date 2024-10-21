@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Echo client program using UDP with sliding window protocol
-import jsockets
+import Redes.T2.files.jsockets as jsockets
 import sys
 import threading
 import time

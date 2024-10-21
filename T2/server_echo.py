@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Echo server program - version of server_echo.c
-import jsockets, sys
+import Redes.T2.files.jsockets as jsockets, sys
 
 s = jsockets.socket_tcp_bind(1818)
 if s is None:
