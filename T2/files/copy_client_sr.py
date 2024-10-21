@@ -133,13 +133,12 @@ s.close()
 """
 
 # Selective Repeat
-import Redes.T2.files.jsockets as jsockets
+import jsockets
 import sys, threading, time
 
 # error handling
 if len(sys.argv) != 5:
-    print('Use: ' + sys.argv[0] + ' pack_sz win host port')
-    sys.stdout.flush()
+    print('Use: ' + sys.argv[0] + ' pack_sz win host port', file=sys.stderr)
     sys.exit(1)
 
 # mutex
@@ -210,11 +209,10 @@ def Sender(s):
             s.send(empty_packet)
             all_data_sent = True
             # final stats and closing
-            print('Empty packet seq num:', seq_num)
-            print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win)
-            print('Send errors:', num_retransmissions)
-            print('Receive errors:', num_out_of_order)
-            sys.stdout.flush()
+            print('Empty packet seq num:', seq_num, file=sys.stderr)
+            print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win, file=sys.stderr)
+            print('Send errors:', num_retransmissions, file=sys.stderr)
+            print('Receive errors:', num_out_of_order, file=sys.stderr)
             break
 
         # Build the packet: seq_num + data
@@ -248,7 +246,7 @@ def Receiver(s):
         # Receive packet from the socket
         data = s.recv(pack_sz + 2)
         if not data:
-            print("No more data, exiting receiver")
+            print("No more data, exiting receiver", file=sys.stderr)
             break
 
         # Extract sequence number and data
@@ -267,10 +265,9 @@ def Receiver(s):
         if not packet_data and seq_num_received == expected_seq:
             all_data_received = True
             # final stats and closing
-            print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win)
-            print('Send errors:', num_retransmissions)
-            print('Receive errors:', num_out_of_order)
-            sys.stdout.flush()
+            print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win, file=sys.stderr)
+            print('Send errors:', num_retransmissions, file=sys.stderr)
+            print('Receive errors:', num_out_of_order, file=sys.stderr)
             break
 # ENDADDED
 
@@ -298,7 +295,7 @@ def Rdr(s):
 # connection
 s = jsockets.socket_udp_connect(host, port)
 if s is None:
-    print('Could not open socket')
+    print('Could not open socket', file=sys.stderr)
     sys.exit(1)
 
 # receiver thread
@@ -322,10 +319,9 @@ Sender(s)
 reader_thread.join()
 
 # final stats and closing
-print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win)
-print('Send errors:', num_retransmissions)
-print('Receive errors:', num_out_of_order)
-sys.stdout.flush()
+print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win, file=sys.stderr)
+print('Send errors:', num_retransmissions, file=sys.stderr)
+print('Receive errors:', num_out_of_order, file=sys.stderr)
 
 # closing connection
 s.close()

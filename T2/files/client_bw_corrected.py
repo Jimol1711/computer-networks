@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 # Echo client program
 # Version with two threads: one reads from stdin to the socket and the other does the reverse
-import Redes.T2.files.jsockets as jsockets
+import jsockets
 import sys, threading
 import time
 
 # error handling
 if len(sys.argv) != 5:
-    print('Use: ' + sys.argv[0] + ' pack_sz win host port')
-    sys.stdout.flush()
+    print('Use: ' + sys.argv[0] + ' pack_sz win host port', file=sys.stderr)
     sys.exit(1)
 
 # mutex
@@ -45,8 +44,7 @@ def Rdr(s):
         data = s.recv(pack_sz + 2)
         
         if not data:
-            print("No more data, exiting receiver")
-            sys.stdout.flush()
+            print("No more data, exiting receiver", file=sys.stderr)
             break
 
         # seq num and data
@@ -61,11 +59,10 @@ def Rdr(s):
                 if packet_data == b'':  # Empty packet indicates end
 
                     # Esto nunca se imprime, pero sería lo correcto
-                    print(f"Final packet received (Seq: {seq_num_received}). Exiting.")
-                    print('Using: pack:', pack_sz, 'maxwin:', win)
-                    print('Send errors:', num_retransmissions)
-                    print('Receive errors:', 0) # esto está en 0 porque aún estoy viendo como detectar los errores de recibo
-                    sys.stdout.flush()
+                    print(f"Final packet received (Seq: {seq_num_received}). Exiting.", file=sys.stderr)
+                    print('Using: pack:', pack_sz, 'maxwin:', win, file=sys.stderr)
+                    print('Send errors:', num_retransmissions, file=sys.stderr)
+                    print('Receive errors:', 0, file=sys.stderr) # esto está en 0 porque aún estoy viendo como detectar los errores de recibo
 
                     # aquí cambio las flags pero tampoco me funciona para cerrar el programa
                     final_packet_acked = True
@@ -82,7 +79,6 @@ def Rdr(s):
 s = jsockets.socket_udp_connect(host, port)
 if s is None:
     print('Could not open socket')
-    sys.stdout.flush()
     sys.exit(1)
 
 reader_thread = threading.Thread(target=Rdr, args=(s,))
@@ -97,13 +93,11 @@ def resend_unacked_packets():
     global seq_base, retransmissions
     with mutex:
         num_retransmissions += 1
-        print("Timeout! Resending unacknowledged packets from", seq_base)
-        sys.stdout.flush()
+        print("Timeout! Resending unacknowledged packets from", seq_base, file=sys.stderr)
         for sn in range(seq_base, seq_num):
             if sn in unacked_packets:
                 s.sendto(unacked_packets[sn], (host, port))
-                print(f"Retransmitting packet {sn}")
-                sys.stdout.flush()
+                print(f"Retransmitting packet {sn}", file=sys.stderr)
 
 while True:
     with mutex:
@@ -124,10 +118,9 @@ while True:
                 # Al imprimir aquí si se muestra en el archivo OUT
                 # El tema es que esto no necesariamente está bien porque no sé
                 # si el paquete vacío esta acked
-                print('Using: pack:', pack_sz, 'maxwin:', win)
-                print('Send errors:', num_retransmissions)
-                print('Receive errors:', 0)
-                sys.stdout.flush()
+                print('Using: pack:', pack_sz, 'maxwin:', win, file=sys.stderr) 
+                print('Send errors:', num_retransmissions, file=sys.stderr)
+                print('Receive errors:', 0, file=sys.stderr)
                 seq_num += 1
                 break
 
@@ -136,8 +129,7 @@ while True:
 
             s.sendto(packet, (host, port))
             unacked_packets[seq_num] = packet
-            print(f"Sent packet {seq_num}")
-            sys.stdout.flush()
+            print(f"Sent packet {seq_num}", file=sys.stderr)
             seq_num += 1
 
     start_time = time.time()
@@ -165,10 +157,9 @@ with condition:
 reader_thread.join()
 
 # Esto nunca se imprime
-print('Using: pack:', pack_sz + 2, 'maxwin:', win)
-print('Send errors:', num_retransmissions)
-print('Receive errors:', num_out_of_order)
-sys.stdout.flush()
+print('Using: pack:', pack_sz + 2, 'maxwin:', win, file=sys.stderr)
+print('Send errors:', num_retransmissions, file=sys.stderr)
+print('Receive errors:', num_out_of_order, file=sys.stderr)
 
 # closing connection
 s.close()

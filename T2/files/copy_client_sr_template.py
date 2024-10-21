@@ -133,14 +133,13 @@ s.close()
 """
 
 # Selective Repeat
-import Redes.T2.files.jsockets as jsockets
+import jsockets
 import sys, threading
 import time
 
 # error handling
 if len(sys.argv) != 5:
-    print('Use: ' + sys.argv[0] + ' pack_sz win host port')
-    sys.stdout.flush()
+    print('Use: ' + sys.argv[0] + ' pack_sz win host port', file=sys.stderr)
     sys.exit(1)
 
 # mutex
@@ -187,7 +186,7 @@ def Rdr(s):
         data = s.recv(pack_sz + 2)        
         
         if not data:
-            print("No more data, exiting receiver")
+            print("No more data, exiting receiver", file=sys.stderr)
             break
 
         # seq num and data
@@ -214,10 +213,9 @@ while True:
 reader_thread.join()
 
 # final stats and closing
-print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win)
-print('Send errors:', num_retransmissions)
-print('Receive errors:', num_out_of_order)
-sys.stdout.flush()
+print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win, file=sys.stderr)
+print('Send errors:', num_retransmissions, file=sys.stderr)
+print('Receive errors:', num_out_of_order, file=sys.stderr)
 
 # closing connection
 s.close()
