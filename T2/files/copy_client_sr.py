@@ -158,7 +158,11 @@ timeout = 0.5
 num_retransmissions = 0
 num_out_of_order = 0
 
-
+# seq num variables
+req_num = 0
+seq_num = 0
+seq_base = 0
+seq_max = win + 1
 
 # windows
 send_window = [None] * win
@@ -277,8 +281,7 @@ def Receiver(s):
 """
 # ENDADDED
 
-# MINE
-# function to receive packets
+# receiver thread
 def Receiver(s):
 
     global req_num, receive_window, num_out_of_order
@@ -306,8 +309,8 @@ def Receiver(s):
 
             while receive_window[req_num] is not None:
                 sys.stdout.buffer.write(receive_window[req_num])
-                req_num += 1
                 receive_window[req_num] = None
+                req_num += 1
 
         elif seq_num_received > req_num:
             receive_window[seq_num_received] = packet_data
@@ -318,7 +321,27 @@ def Receiver(s):
             continue
 
     return
-# ENDMINE
+
+# sender thread
+def Sender(s):
+    
+    global req_num, seq_base, seq_max, receive_window, num_retransmissions, num_out_of_order
+    
+    while True:
+        # HERE SHOULD BE IMPLEMENTED LOGIC FOR SENDER THREAD
+        if req_num > seq_base:
+            seq_max = (seq_max - seq_base) + req_num
+            seq_base = req_num
+        
+            # Remove packets with Sn < Rn from the buffer
+            for i in range(0, len(receive_window)):
+                seq_num_packet = int.from_bytes(receive_window[i][:2], 'big') if receive_window[i] is not None else -1
+                if seq_num_packet != -1:
+                    receive_window[i] = None
+                else:
+                    continue
+                
+    return
 
 # connection
 s = jsockets.socket_udp_connect(host, port)
@@ -326,25 +349,15 @@ if s is None:
     print('Could not open socket', file=sys.stderr)
     sys.exit(1)
 
-# receiver thread
-reader_thread = threading.Thread(target=Receiver, args=(s,))
-reader_thread.start()
+# starting threads
+sender_thread = threading.Thread(target=Sender, args=(s,))
+sender_thread.start()
 
-# REMOVED
-"""
-# sender thread (main)
-while True:
-    # HERE SHOULD BE IMPLEMENTED LOGIC FOR SENDER THREAD
-    break
-"""
-# ENDREMOVED
+receiver_thread = threading.Thread(target=Receiver, args=(s,))
+receiver_thread.start()
 
-# ADDED
-# Sender logic runs in main thread
-Sender(s)
-# ENDADDED
-
-reader_thread.join()
+sender_thread.join()
+receiver_thread.join()
 
 # final stats and closing
 print('Using: pack_sz:', pack_sz + 2, 'maxwin:', win, file=sys.stderr)
