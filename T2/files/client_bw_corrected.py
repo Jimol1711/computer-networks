@@ -12,7 +12,7 @@ if len(sys.argv) != 5:
 
 # mutex
 mutex = threading.Lock()
-condition = threading.Condition(mutex)
+cond = threading.Condition()
 
 # input variables
 pack_sz = int(sys.argv[1]) - 2
@@ -54,7 +54,7 @@ def Rdr(s):
         # veo si es el sequence number que espera y si no, lo ignora
         # si es el paquete vacío notifica para que el programa se cierre
         # aquí está el problema 1, no sé porqué no se está cerrando
-        with mutex:
+        with cond:
             if seq_num_received == req_num:
                 if packet_data == b'':  # Empty packet indicates end
 
@@ -67,7 +67,7 @@ def Rdr(s):
                     # aquí cambio las flags pero tampoco me funciona para cerrar el programa
                     final_packet_acked = True
                     terminate_program = True
-                    condition.notify_all()
+                    cond.notify_all()
                     break
 
                 sys.stdout.buffer.write(packet_data)
@@ -90,7 +90,7 @@ with mutex:
 
 # Function to resend unacknowledged packets
 def resend_unacked_packets():
-    global seq_base, retransmissions
+    global seq_base, num_retransmissions
     with mutex:
         num_retransmissions += 1
         print("Timeout! Resending unacknowledged packets from", seq_base, file=sys.stderr)
@@ -100,7 +100,7 @@ def resend_unacked_packets():
                 print(f"Retransmitting packet {sn}", file=sys.stderr)
 
 while True:
-    with mutex:
+    with cond:
         if terminate_program:
             break
 
@@ -114,13 +114,6 @@ while True:
 
                 unacked_packets[seq_num] = packet
                 print(f"Sent final empty packet {seq_num}")
-
-                # Al imprimir aquí si se muestra en el archivo OUT
-                # El tema es que esto no necesariamente está bien porque no sé
-                # si el paquete vacío esta acked
-                print('Using: pack:', pack_sz, 'maxwin:', win, file=sys.stderr) 
-                print('Send errors:', num_retransmissions, file=sys.stderr)
-                print('Receive errors:', 0, file=sys.stderr)
                 seq_num += 1
                 break
 
@@ -134,25 +127,25 @@ while True:
 
     start_time = time.time()
 
-    with condition:
+    with cond:
         while req_num <= seq_base and not terminate_program:
             elapsed_time = time.time() - start_time
             if elapsed_time >= timeout:
                 resend_unacked_packets()
                 start_time = time.time()
-            condition.wait(timeout - elapsed_time)
+            cond.wait(timeout - elapsed_time)
 
     with mutex:
         seq_base = req_num
         seq_max = seq_base + win - 1
 
-with condition:
+with cond:
     while not final_packet_acked and not terminate_program:
         elapsed_time = time.time() - start_time
         if elapsed_time >= timeout:
             resend_unacked_packets()
             start_time = time.time()
-        condition.wait(timeout - elapsed_time)
+        cond.wait(timeout - elapsed_time)
 
 reader_thread.join()
 

@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
 import jsockets
-import sys
-import threading
-import time
+import sys, threading, time
 
 # Error handling for arguments
 if len(sys.argv) != 5:
@@ -14,37 +12,38 @@ if len(sys.argv) != 5:
 mutex = threading.Lock()
 cond = threading.Condition()
 
-# Input variables
-pack_sz = int(sys.argv[1]) - 2
-win = int(sys.argv[2])
-host = sys.argv[3]
-port = int(sys.argv[4])
-
-# Initial timeout and RTT
-timeout = 0.5
-
-# Counters
+# Global variables (initialized later)
+pack_sz = None
+win = None
+host = None
+port = None
+timeout = None
+rtt = None
 num_retransmissions = 0
 num_out_of_order = 0
+seq_num = None
+seq_base = None
+seq_max = None
+send_window = None
+receive_window = None
+all_data_sent = False
+all_data_received = False
 
-# variables
-N = win
-req_num = 0
-seq_num = 0
-seq_base = 0
-seq_max = 0
+# Synchronization flag
+initialized = False  # Indicates if all global variables are initialized
 
-# Windows
-send_window = [None] * win
-receive_window = [None] * win
-
-# Adaptative timeout function
+# Adaptive timeout function
 def adapt_timeout(rtt):
     return rtt * 3
 
 # Sender thread
 def Sender(s):
-    global num_retransmissions, seq_num, seq_base, seq_max, send_window, timeout
+    global num_retransmissions, all_data_sent, seq_num, rtt
+
+    with cond:
+        # Wait for initialization
+        while not initialized:
+            cond.wait()
 
     while True:
         data = sys.stdin.buffer.read(pack_sz)
@@ -53,36 +52,39 @@ def Sender(s):
             with cond:
                 empty_packet = seq_num.to_bytes(2, 'big')
                 s.send(empty_packet)
+                all_data_sent = True
                 cond.notify_all()
             break
 
         # Build packet with sequence number
         packet = seq_num.to_bytes(2, 'big') + data
-        
+
         with cond:
             # Send packet and save in the window
             s.send(packet)
-            print("Sending packet", seq_num, file=sys.stderr)
             send_window[seq_num % win] = packet
             start_time = time.time()
 
             # Wait until the window has space
             while seq_num >= seq_base + win:
-                cond.wait(timeout)
+                cond.wait()
 
-            rtt = time.time() - start_time
-
-            with mutex:
-                timeout = adapt_timeout(rtt)
-            
             # Update sequence number
             seq_num = (seq_num + 1) % 65536
 
+            # Adaptive RTT for retransmission timeout
+            rtt = adapt_timeout(time.time() - start_time)
+
 # Receiver thread
 def Receiver(s):
-    global num_out_of_order, seq_base
+    global num_out_of_order, all_data_received, seq_base
 
     expected_seq = 0
+
+    with cond:
+        # Wait for initialization
+        while not initialized:
+            cond.wait()
 
     while True:
         data = s.recv(pack_sz + 2)
@@ -96,6 +98,7 @@ def Receiver(s):
         with cond:
             # If empty packet is received and it's the expected sequence, we are done
             if not packet_data and seq_num_received == expected_seq:
+                all_data_received = True
                 cond.notify_all()
                 break
 
@@ -119,11 +122,28 @@ def Receiver(s):
             seq_base = expected_seq
             cond.notify_all()
 
-# Connection setup
+# Connection setup and initialization
 s = jsockets.socket_udp_connect(host, port)
 if s is None:
     print('Could not open socket', file=sys.stderr)
     sys.exit(1)
+
+# Initialize the global variables before starting the threads
+with cond:
+    pack_sz = int(sys.argv[1]) - 2
+    win = int(sys.argv[2])
+    host = sys.argv[3]
+    port = int(sys.argv[4])
+    timeout = 0.5
+    rtt = timeout
+    seq_num = 0
+    seq_base = 0
+    seq_max = win + 1
+    send_window = [None] * win
+    receive_window = [None] * win
+
+    initialized = True
+    cond.notify_all()  # Wake up both Sender and Receiver threads
 
 # Start the sender and receiver threads
 sender_thread = threading.Thread(target=Sender, args=(s,))
@@ -143,4 +163,3 @@ print('Receive errors:', num_out_of_order, file=sys.stderr)
 
 # Close connection
 s.close()
-
