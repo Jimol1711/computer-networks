@@ -29,14 +29,15 @@ num_out_of_order = 0
 
 # variables
 N = win
-req_num = 0
-seq_num = 0
-seq_base = 0
-seq_max = 0
+Rn = 0
+Sn = 0
+Sb = 0
+Sm = 0
 
 # Windows
-send_window = [None] * win
-receive_window = [None] * win
+send_window = [False] * N
+receive_window = [False] * N
+buffer = [False] * N
 
 # Adaptative timeout function
 def adapt_timeout(rtt):
@@ -44,80 +45,109 @@ def adapt_timeout(rtt):
 
 # Sender thread
 def Sender(s):
-    global num_retransmissions, seq_num, seq_base, seq_max, send_window, timeout
+
+    global Sb, Sm, buffer, Sn, Rn, N, timeout, num_retransmissions
+
+    with mutex:
+        Sb = 0
+        Sm = N + 1
+        buffer = [None] * N  # Buffer to hold packets or None for empty slots
+        Sn = 0  # Initial sequence number
+        Rn = 0  # Request number initially 0
 
     while True:
+        # Check if we received a request number greater than Sb
+        if Rn > Sb:
+            with mutex:
+                Sb = Rn
+                Sm = Sb + N
+
+                # Remove packets from buffer with sequence numbers < Rn
+                for i in range(len(buffer)):
+                    if buffer[i]:
+                        seq_num_on_buffer = int.from_bytes(buffer[i][:2], 'big')
+                        if seq_num_on_buffer < Rn:
+                            buffer[i] = None  # Clear packet from buffer
+
+        # Read new data from stdin
         data = sys.stdin.buffer.read(pack_sz)
         if not data:
-            # Send an empty packet to signal the end of transmission
-            with cond:
-                empty_packet = seq_num.to_bytes(2, 'big')
-                s.send(empty_packet)
-                cond.notify_all()
-            break
+            break  # End of input
 
-        # Build packet with sequence number
-        packet = seq_num.to_bytes(2, 'big') + data
-        
+        packet = Sn.to_bytes(2, 'big') + data  # Packet includes sequence number
+
         with cond:
-            # Send packet and save in the window
-            s.send(packet)
-            print("Sending packet", seq_num, file=sys.stderr)
-            send_window[seq_num % win] = packet
-            start_time = time.time()
+            # Check if Sn is within the send window
+            if Sb <= Sn < Sm:
+                start_time = time.time()  # Start timer for timeout
+                s.send(packet)  # Send the packet
+                print("Sending packet", Sn, file=sys.stderr)
 
-            # Wait until the window has space
-            while seq_num >= seq_base + win:
-                cond.wait(timeout)
+                # Store the packet in the buffer (for retransmission if needed)
+                buffer[Sn % N] = packet
 
+                # Wait for the condition (ACK or timeout)
+                if not cond.wait(timeout):  # Wait with timeout
+                    print(f"Timeout occurred for packet {Sn}", file=sys.stderr)
+                    # Timeout logic will trigger retransmission later
+
+                Sn += 1  # Increment sequence number
+
+        # Retransmission logic
+        for i in range(len(buffer)):
+            if buffer[i]:  # Packet exists in buffer
+                # Check if the packet has timed out
+                if time.time() - start_time >= timeout:
+                    s.send(buffer[i])  # Retransmit packet
+                    print("Retransmitting packet", i, file=sys.stderr)
+                    start_time = time.time()  # Reset the timer after retransmission
+                    num_retransmissions += 1  # Increment retransmission counter
+
+        # Update RTT and timeout based on successful transmissions
+        with mutex:
             rtt = time.time() - start_time
-
-            with mutex:
-                timeout = adapt_timeout(rtt)
-            
-            # Update sequence number
-            seq_num = (seq_num + 1) % 65536
-
+            timeout = adapt_timeout(rtt)
+   
 # Receiver thread
 def Receiver(s):
-    global num_out_of_order, seq_base
 
-    expected_seq = 0
+    global Rn, buffer
+
+    with mutex:
+        Rn = 0  # Initialize Rn (expected sequence number)
+        buffer = [None] * N  # Initialize buffer with None for empty slots
 
     while True:
-        data = s.recv(pack_sz + 2)
+        # Receive packet
+        data = s.recv(pack_sz + 2)  # Includes 2 bytes for sequence number
         if not data:
-            break
+            print("Received last packet", file=sys.stderr)
+            break  # Exit the loop if the connection is closed (or an empty packet is received)
 
         # Extract sequence number and packet data
         seq_num_received = int.from_bytes(data[:2], 'big')
         packet_data = data[2:]
 
-        with cond:
-            # If empty packet is received and it's the expected sequence, we are done
-            if not packet_data and seq_num_received == expected_seq:
-                cond.notify_all()
-                break
+        if seq_num_received == Rn:
+            # Expected packet, write it to stdout
+            sys.stdout.buffer.write(packet_data)
+            Rn = (Rn + 1) % 65536  # Update Rn to expect the next packet
 
-            # If the received packet is in order, write to stdout
-            if seq_num_received == expected_seq:
-                sys.stdout.buffer.write(packet_data)
-                expected_seq = (expected_seq + 1) % 65536
+            # Process any buffered packets that are in order
+            with mutex:
+                while buffer[Rn % N]:
+                    sys.stdout.buffer.write(buffer[Rn % N][2:])  # Write the buffered data
+                    buffer[Rn % N] = None  # Mark buffer slot as empty
+                    Rn = (Rn + 1) % 65536  # Move to the next expected packet
 
-                # Write any packets already in the receive window
-                while receive_window[expected_seq] is not None:
-                    sys.stdout.buffer.write(receive_window[expected_seq])
-                    receive_window[expected_seq] = None
-                    expected_seq = (expected_seq + 1) % 65536
+        elif seq_num_received > Rn:
+            # Out-of-order packet, store it in the buffer
+            with mutex:
+                buffer[seq_num_received % N] = data  # Buffer the packet for later
 
-            # If the packet is out of order, store it in the receive window
-            elif seq_num_received > expected_seq:
-                receive_window[seq_num_received % win] = packet_data
-                num_out_of_order += 1
-
-            # Notify sender to adjust the base of the window
-            seq_base = expected_seq
-            cond.notify_all()
+        else:
+            # Received an already processed packet, likely a retransmission (ignore)
+            continue
 
 # Connection setup
 s = jsockets.socket_udp_connect(host, port)
