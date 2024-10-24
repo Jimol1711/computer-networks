@@ -14,7 +14,6 @@ if client_socket is None:
     print("could not open socket", file=sys.stderr)
     sys.exit(1)
 
-
 mutex = threading.Lock()
 window_full = threading.Condition(mutex)
 seq_base = 0

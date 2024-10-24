@@ -28,23 +28,14 @@ num_out_of_order = 0
 # windows
 send_window = [None] * win
 receive_window = [None] * win
-send_base = 0  # seq num of the base of the sending window
+base = 0  # seq num of the base of the sending window
 recv_base = 0  # seq num of the base of the receiving window
-expected_seq = 0  # expected seq num in the receiving window
+seq_num = 0  # expected seq num in the receiving window
+next_seq_num = 0
 
 # Helper functions
 def adapt_timeout(rtt):
     return rtt * 3
-
-def adapt_window(window, new_element):
-    """
-    Shifts the window to the left and add the new packet at the end
-    :param window: list representing the window
-    :param new_element: element to add at the end of the window
-    """
-    window.pop(0)
-    window.append(new_element)
-    return window
 
 # function to receive packets
 def Rdr(s):
@@ -54,6 +45,7 @@ def Rdr(s):
         print("entering while rec", file=sys.stderr)
         print("entering while rec asdsa", file=sys.stderr)
         data = s.recv(pack_sz + 2)
+        print("entering while rec asdswdadwaa", file=sys.stderr)
 
         seq_num_received = int.from_bytes(data[:2], 'big')
         packet_data = data[2:]
@@ -98,38 +90,70 @@ if s is None:
 reader_thread = threading.Thread(target=Rdr, args=(s,))
 reader_thread.start()
 
-# Sender logic
-seq_num = 0  # Start with sequence number 0
-base = 0     # base of the window
-next_seq_num = 0  # Next sequence number to send
+# read file to data chunks list
 file_data = sys.stdin.buffer.read()  # Read file input
 data_chunks = [file_data[i:i+pack_sz] for i in range(0, len(file_data), pack_sz)]
 
-start_time = time.time()
+# class to create a packet to send
+class Packet:
+    def __init__(self, seq_num, data):
+        self.seq_num = seq_num  # Sequence number
+        self.data = data  # Data payload
+        self.start_time = time.time()  # Timestamp when packet was created
+        self.acked = False # Acked flag
 
-print("entering while", file=sys.stderr)
-while next_seq_num < len(data_chunks) or (next_seq_num == len(data_chunks) and seq_num < base + win):
-    print("infinite loop?", file=sys.stderr)
+def send_packet():
+    global next_seq_num, seq_num
+    # Prepare the packet
+    packet_data = data_chunks[next_seq_num]
+    packet = seq_num.to_bytes(2, 'big') + packet_data
+
+    packet_obj = Packet(next_seq_num, packet)
+
+    # Send the packet
+    s.send(packet)
+    print(f"Sent packet {seq_num}", file=sys.stderr)
+    send_window[next_seq_num % win] = packet_obj
+
+    next_seq_num += 1
+    seq_num = (seq_num + 1) % 65536
+    return packet_obj
+
+print("Start sending", file=sys.stderr)
+
+while next_seq_num < len(data_chunks) and next_seq_num < base + win:
+    print("Sending in progress...", file=sys.stderr)
     # Wait until there's space in the window
+    with mutex:
+        # sending packet
+        send_packet()
+
+# Window is filled, now wait for ACK of the first packet (or retransmit on timeout)
+print(f"Window filled, waiting for ACK for seq_num {seq_num}", file=sys.stderr)
+        
+# Wait for the first packet in the window to be acknowledged
+while not receive_window[base % win]:
     with condition:
-        if next_seq_num < len(data_chunks):
-            # Prepare the packet
-            packet_data = data_chunks[next_seq_num]
-            packet = seq_num.to_bytes(2, 'big') + packet_data
-            # Send the packet
-            s.send(packet)
-            print(f"Sent packet {seq_num}", file=sys.stderr)
-            send_window[next_seq_num % win] = packet
+        # Wait for either an ACK to arrive or timeout
+        if not condition.wait(timeout):
+            # Timeout occurred, so retransmit the entire window
+            print("Timeout! Retransmitting window...", file=sys.stderr)
+            
+            with mutex:
+                for i in range(base, base + win):
+                    if i < len(data_chunks) and send_window[i % win]:
+                        resend_packet = send_window[i % win]
+                        if not resend_packet.acked:
+                            s.send(resend_packet.data)
+                            print(f"Retransmitted packet {resend_packet.seq_num}", file=sys.stderr)
 
-            next_seq_num += 1
-            seq_num = (seq_num + 1) % 65536  # Sequence number wraps around at 65535
-        else:
-            condition.wait()  # Wait for an ACK or timeout to free space
+# Slide the window forward
+with mutex:
+    receive_window[base % win] = None  # Clear the acknowledged packet
+    base += 1  # Move the base of the window forward
 
-    # Check for timeout (simplified)
-    rtt = time.time() - start_time
-    timeout = adapt_timeout(rtt)
-    start_time = time.time()
+# Once the first packet has been acknowledged:
+print(f"Packet with sequence number {seq_num} acknowledged.", file=sys.stderr)
 
 # Sending final empty packet
 final_packet = seq_num.to_bytes(2, 'big')  # Empty data
