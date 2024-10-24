@@ -28,7 +28,7 @@ num_out_of_order = 0
 # windows
 send_window = [None] * win
 receive_window = [None] * win
-base = 0  # seq num of the base of the sending window
+send_base = 0  # seq num of the base of the sending window
 recv_base = 0  # seq num of the base of the receiving window
 seq_num = 0  # expected seq num in the receiving window
 next_seq_num = 0
@@ -39,7 +39,7 @@ def adapt_timeout(rtt):
 
 # function to receive packets
 def Rdr(s):
-    global num_out_of_order, expected_seq, recv_base
+    global num_out_of_order, seq_num, recv_base
 
     while True:
         print("entering while rec", file=sys.stderr)
@@ -62,9 +62,9 @@ def Rdr(s):
         mutex.acquire()
         if recv_base <= seq_num_received < recv_base + win:
             # In-order packet
-            if seq_num_received == expected_seq:
+            if seq_num_received == seq_num:
                 sys.stdout.buffer.write(packet_data)  # Output the packet content
-                expected_seq += 1
+                seq_num += 1
             else:
                 # Out-of-order packet
                 num_out_of_order += 1
@@ -77,7 +77,7 @@ def Rdr(s):
 
         print("infinite loop 2?", file=sys.stderr)
         # Exit condition: received an empty packet, and all in-order packets are received
-        if not packet_data: # and expected_seq == recv_base:
+        if not packet_data:
             break
 
 # connection
@@ -121,7 +121,7 @@ def send_packet():
 
 print("Start sending", file=sys.stderr)
 
-while next_seq_num < len(data_chunks) and next_seq_num < base + win:
+while next_seq_num < len(data_chunks) and next_seq_num < send_base + win:
     print("Sending in progress...", file=sys.stderr)
     # Wait until there's space in the window
     with mutex:
@@ -132,7 +132,7 @@ while next_seq_num < len(data_chunks) and next_seq_num < base + win:
 print(f"Window filled, waiting for ACK for seq_num {seq_num}", file=sys.stderr)
         
 # Wait for the first packet in the window to be acknowledged
-while not receive_window[base % win]:
+while not receive_window[send_base % win]:
     with condition:
         # Wait for either an ACK to arrive or timeout
         if not condition.wait(timeout):
@@ -140,7 +140,7 @@ while not receive_window[base % win]:
             print("Timeout! Retransmitting window...", file=sys.stderr)
             
             with mutex:
-                for i in range(base, base + win):
+                for i in range(send_base, send_base + win):
                     if i < len(data_chunks) and send_window[i % win]:
                         resend_packet = send_window[i % win]
                         if not resend_packet.acked:
@@ -149,8 +149,8 @@ while not receive_window[base % win]:
 
 # Slide the window forward
 with mutex:
-    receive_window[base % win] = None  # Clear the acknowledged packet
-    base += 1  # Move the base of the window forward
+    receive_window[send_base % win] = None  # Clear the acknowledged packet
+    send_base += 1  # Move the base of the window forward
 
 # Once the first packet has been acknowledged:
 print(f"Packet with sequence number {seq_num} acknowledged.", file=sys.stderr)
