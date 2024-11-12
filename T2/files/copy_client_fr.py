@@ -84,7 +84,7 @@ def receive_ack():
                 else:
                     errores_recepcion += 1
         except TimeoutError:
-            print("timeout")
+            print("timeout", file=sys.stderr)
 
 
 ack_thread = threading.Thread(target=receive_ack)
