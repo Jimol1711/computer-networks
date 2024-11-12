@@ -13,9 +13,9 @@ def socket_tcp_bind(port):
 def socket_udp_bind(port):
     return socket_bind(socket.SOCK_DGRAM, port)
 
-def socket_bind(type, port):
+def socket_bind(type, port, ip_address=None):
     s = None
-    for res in socket.getaddrinfo(None, port, socket.AF_UNSPEC, type, 0, socket.AI_PASSIVE):
+    for res in socket.getaddrinfo(ip_address, port, socket.AF_UNSPEC, type, 0, socket.AI_PASSIVE):
         af, socktype, proto, canonname, sa = res
         try:
             s = socket.socket(af, socktype, proto)
@@ -24,11 +24,10 @@ def socket_bind(type, port):
             continue
         try:
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            if(type == socket.SOCK_DGRAM):
+            if type == socket.SOCK_DGRAM:
                 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
-                # s.setsockopt(socket.IPPROTO_IP, socket.IP_MTU_DISCOVER, 0) Para Linux?
             s.bind(sa)
-            if(type == socket.SOCK_STREAM):
+            if type == socket.SOCK_STREAM:
                 s.listen(5)
         except socket.error as msg:
             s.close()
