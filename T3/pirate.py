@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import sys
-from scapy.all import *
+import sys # ('10.0.2.15', 53688)
+from scapy.all import UDP, IP, Raw, send, sniff
 import random
 
 def inject_pirate_packets(server_ip, server_port, client_ip, client_port):
