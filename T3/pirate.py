@@ -26,14 +26,14 @@ def inject_pirate_packets(server_ip, server_port, client_ip, client_port):
     # Start sniffing for packets based on the filter
     sniff(filter=filter_str, prn=packet_callback, store=0)
 
-if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("Usage: ./pirate.py <server_ip> <server_port> <client_ip> <client_port>")
-        sys.exit(1)
 
-    server_ip = sys.argv[1]
-    server_port = int(sys.argv[2])
-    client_ip = sys.argv[3]
-    client_port = int(sys.argv[4])
+if len(sys.argv) != 5:
+    print("Usage: ./pirate.py <server_ip> <server_port> <client_ip> <client_port>")
+    sys.exit(1)
 
-    inject_pirate_packets(server_ip, server_port, client_ip, client_port)
+server_ip = sys.argv[1]
+server_port = int(sys.argv[2])
+client_ip = sys.argv[3]
+client_port = int(sys.argv[4])
+
+inject_pirate_packets(server_ip, server_port, client_ip, client_port)
