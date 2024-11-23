@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import sys
 from scapy.all import UDP, IP, Raw, send, conf
-import random
 
 print(conf.route)
 

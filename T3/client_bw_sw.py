@@ -33,7 +33,7 @@ def Rdr(s, mutex):
                 #print(f'rcv: recibo {seq}', file=sys.stderr)
                 ack = seq
                 rtime = time.time()
-                mutex.notify
+                mutex.notify()
             if len(data[2:]) == 0: # EOF
                 break
             sys.stdout.buffer.write(data[2:])
