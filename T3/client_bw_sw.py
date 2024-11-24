@@ -5,6 +5,9 @@ import jsockets
 import sys, threading
 import time
 
+# command for running the script:
+# ./client_bw_sw.py 15 127.0.0.1 1818 < 05MbA.txt > OUT
+
 PACK_SZ=1500
 MAX_SEQ=65535
 eof=0
@@ -75,13 +78,15 @@ while not eof:
     tries=0
     while True:
         stime=time.time()
+        time.sleep(0.05)
         if not eof:
             s.send(seq.to_bytes(2, 'big')+data)
         else:
             s.send(seq.to_bytes(2, 'big'))
-        if seq % 100 == 0:
-            print(f'snd: {seq}, t_out: {tout}', file=sys.stderr)
+        # if seq % 100 == 0:
+        print(f'snd: {seq}, t_out: {tout}', file=sys.stderr)
         # Esperamos ACK
+        print("expected: ", ack, file=sys.stderr)
         with mutex:
             mutex.wait(tout)
             # print(f'snd: {seq}, {ack}', file=sys.stderr)

